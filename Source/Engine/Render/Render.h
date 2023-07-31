@@ -24,10 +24,13 @@ namespace kda
 		void DrawPoint(int x1, int y1);
 		void DrawPoint(float x1, float y1);
 
+		void DrawTexture(class Texture* texture, float x, float y, float angle = 0.0f);
+
 		int getWidth() const { return m_width; }
 		int getHeight() const { return m_height; }
 
 		friend class Text;
+		friend class Texture;
 	private:
 		int m_width = 0;
 		int m_height = 0;

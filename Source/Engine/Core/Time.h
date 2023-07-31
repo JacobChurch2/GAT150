@@ -33,8 +33,8 @@ namespace kda
 		void SetTimeScale(float timeScale) { m_timeScale = timeScale; }
 
 	private:
-		float m_time;
-		float m_deltaTime;
+		float m_time = 0;
+		float m_deltaTime = 0;
 		float m_timeScale = 1;
 
 		clock::time_point m_startTime;

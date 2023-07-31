@@ -1,5 +1,7 @@
 #include "Render.h"
 #include "SDL2-2.28.0/include/SDL_ttf.h"
+#include "SDL2-2.28.0/include/SDL_image.h"
+#include "Texture.h"
 
 namespace kda
 {
@@ -8,6 +10,7 @@ namespace kda
 	bool Renderer::Initialize()
 	{
 		SDL_Init(SDL_INIT_VIDEO);
+		IMG_Init(IMG_INIT_JPG | IMG_INIT_PNG);
 		TTF_Init();
 
 		return false;
@@ -17,6 +20,7 @@ namespace kda
 		SDL_DestroyRenderer(m_renderer);
 		SDL_DestroyWindow(m_window);
 		TTF_Quit();
+		IMG_Quit();
 	}
 	void Renderer::CreateWindow(const std::string& title, int width, int height)
 	{
@@ -25,6 +29,19 @@ namespace kda
 		m_window = SDL_CreateWindow(title.c_str(), 100, 100, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 		m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
 	}
+
+	void Renderer::DrawTexture(Texture* texture, float x, float y, float angle)
+	{
+		vec2 size = texture->GetSize();
+		SDL_Rect dest;
+		dest.x = x;
+		dest.y = y;
+		dest.w = size.x;
+		dest.h = size.y;
+		// https://wiki.libsdl.org/SDL2/SDL_RenderCopyEx
+		SDL_RenderCopyEx(m_renderer, texture->m_texture, NULL, &dest, angle, NULL, SDL_FLIP_NONE);
+	}
+
 	void Renderer::BeginFrame()
 	{
 		SDL_RenderClear(m_renderer);

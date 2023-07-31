@@ -9,6 +9,7 @@
 #include "Render/ModelManager.h"
 #include "Render/ParticleSystem.h"
 #include "Framework/Emitter.h"
+#include "Render/Texture.h"
 
 #include "SpaceGame.h"
 
@@ -24,11 +25,11 @@ class Star
 public:
 	Star(const kda::Vector2& pos, const kda::Vector2& vel) : m_pos{ pos }, m_vel{ vel } {}
 
-	void Update(int heigh, int width)
+	void Update(int height, int width)
 	{
 		m_pos += m_vel * kda::g_time.GetDeltaTime();
 
-		if (m_pos.x >= heigh) m_pos.x = 0;
+		if (m_pos.x >= height) m_pos.x = 0;
 		if (m_pos.y >= width) m_pos.y = 0;
 	}
 
@@ -44,6 +45,7 @@ public:
 
 int main(int argc, char* argv[])
 {
+	INFO_LOG("Hello World");
 
 	//engine setup
 	kda::MemoryTracker::Initialize();
@@ -72,6 +74,11 @@ int main(int argc, char* argv[])
 		stars.push_back(Star(pos, vel));
 	}
 
+	// create texture
+	shared_ptr<kda::Texture> texture = make_shared<kda::Texture>();
+	texture->Create(kda::g_renderer, "ship2.png");
+
+	
 	//main game loop
 	bool quit = false;
 	while (!quit) {
@@ -95,6 +102,7 @@ int main(int argc, char* argv[])
 		kda::g_renderer.SetColor(0,0,0, 255);
 		kda::g_renderer.BeginFrame();
 		//text->Draw(kda::g_renderer, 400, 300);
+		kda::g_renderer.DrawTexture(texture.get(), 200.0f, 200.0f, 0.0f);
 
 		for (auto& star : stars)
 		{

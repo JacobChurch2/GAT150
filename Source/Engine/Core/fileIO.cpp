@@ -1,5 +1,7 @@
 #include "fileIO.h"
+#include "Logger.h"
 #include <Fstream>
+#include <iostream>
 
 namespace kda{
 	std::string kda::getFilePath()
@@ -13,6 +15,11 @@ namespace kda{
 		std::filesystem::current_path(path, ec);
 
 		return ec.value() == 0;
+	}
+
+	std::string getFileName(const std::filesystem::path& path)
+	{
+		return path.filename().string();
 	}
 
 	bool fileExists(const std::filesystem::path& path)
@@ -30,11 +37,15 @@ namespace kda{
 
 	bool readFile(const std::filesystem::path& path, std::string& buffer)
 	{
-		if (!fileExists(path)) return false;
-
+		if (!fileExists(path))
+		{
+			WARNING_LOG("File not Loaded: " << path.string());
+			return false;
+		}
 
 		size_t size;
 		if (!getFileSize(path, size)) return false;
+
 
 		buffer.resize(size);
 

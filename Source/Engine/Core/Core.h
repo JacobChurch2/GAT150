@@ -1,4 +1,6 @@
 #pragma once
+
+#include "Logger.h"
 #include "Random.h"
 #include "fileIO.h"
 #include "Memory.h"
