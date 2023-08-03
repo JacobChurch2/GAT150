@@ -17,6 +17,8 @@
 #include <chrono>
 #include <thread>
 #include <memory>
+#include <array>
+#include <map>
 
 using namespace std;
 
@@ -42,6 +44,17 @@ public:
 	kda::Vector2 m_pos;
 	kda::Vector2 m_vel;
 };
+
+template <typename T>
+void print(const std::string& s, const T& container)
+{
+	std::cout << s << std::endl;
+	for (auto element : container)
+	{
+		std::cout << element << " ";
+	}
+	std::cout << std::endl;
+}
 
 int main(int argc, char* argv[])
 {
@@ -76,7 +89,7 @@ int main(int argc, char* argv[])
 
 	// create texture
 	shared_ptr<kda::Texture> texture = make_shared<kda::Texture>();
-	texture->Create(kda::g_renderer, "ship2.png");
+	texture->Load("ship2.png", kda::g_renderer);
 
 	
 	//main game loop
