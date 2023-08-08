@@ -1,6 +1,9 @@
 #pragma once
-#include "Core/Color.h"
+#include <Core/Math/Color.h>
+#include "Render/Render.h"
 #include "Actor.h"
+#include "Core/Math/Transform.h"
+
 
 namespace kda {
 	struct EmitterData
@@ -10,7 +13,6 @@ namespace kda {
 		float spawnRateTimer = 0;
 		bool burst = false;
 		size_t burstCount = 0;
-
 		// particle parameters
 		float lifetimeMin = 0;
 		float lifetimeMax = 0;
@@ -22,7 +24,6 @@ namespace kda {
 		Color color;
 	};
 
-
 	class Emitter : public Actor
 	{
 	public:
@@ -32,10 +33,11 @@ namespace kda {
 			m_data{ data }
 		{}
 		void Update(float dt);
-		void Draw(kda::Renderer& renderer);
+		void Draw(Renderer& renderer);
 	private:
 		void Emit();
 	private:
 		EmitterData m_data;
 	};
+
 }

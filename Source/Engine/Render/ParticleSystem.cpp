@@ -1,5 +1,4 @@
 #include "ParticleSystem.h"
-#include "Render.h"
 #include "Particle.h"
 
 namespace kda {
@@ -12,7 +11,6 @@ namespace kda {
 			if (particle.m_isActive) particle.Update(dt);
 		}
 	}
-
 	void ParticleSystem::Draw(Renderer& renderer)
 	{
 		for (auto& particle : m_particles)
@@ -20,7 +18,7 @@ namespace kda {
 			if (particle.m_isActive) particle.Draw(renderer);
 		}
 	}
-
+	
 	Particle* ParticleSystem::GetFreeParticle()
 	{
 		for (auto& particle : m_particles)
@@ -29,5 +27,4 @@ namespace kda {
 		}
 		return nullptr;
 	}
-
 }

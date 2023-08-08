@@ -37,15 +37,14 @@ namespace kda{
 
 	bool readFile(const std::filesystem::path& path, std::string& buffer)
 	{
-		if (!fileExists(path))
-		{
-			WARNING_LOG("File not Loaded: " << path.string());
+		if (!fileExists(path)) {
+			WARNING_LOG("No FilePath Exists");
 			return false;
 		}
+			
 
 		size_t size;
 		if (!getFileSize(path, size)) return false;
-
 
 		buffer.resize(size);
 

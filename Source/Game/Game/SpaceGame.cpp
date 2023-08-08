@@ -1,56 +1,49 @@
 #include "SpaceGame.h"
 #include "Player.h"
-#include "Framework/Actor.h"
 #include "Enemy.h"
-#include "Framework/Game.h"
 
-#include "Framework/Scene.h"
+#include "Framework/Framework.h"
 
 #include "Audio/AudioSystem.h"
 #include "Input/InputSystem.h"
 #include "Render/Render.h"
 #include "Render/Text.h"
-#include "Render/ModelManager.h"
+#include "Render/ParticleSystem.h"
+#include "Render/Particle.h"
 #include "Framework/Emitter.h"
 
-bool SpaceGame::Initialize()
-{
-	// create font / text objects
-	m_font = std::make_shared<kda::Font> ("ggtype.ttf", 24);
-	m_scoreText = std::make_unique<kda::Text>(m_font);
-	m_scoreText->Create(kda::g_renderer, "Score 0000", kda::Color{ 1, 1, 1, 1 });
+bool SpaceGame::Initialize(){
+	//Create fonts/ text objects
+	//m_font = kda::g_resources.Get<kda::Font>("MetalRocker.ttf", 24);
+	m_scoreText = std::make_unique<kda::Text>(kda::g_resources.Get<kda::Font>("ggtype.ttf", 24));
+	m_scoreText->Create(kda::g_renderer, "0000", kda::Color{ 1, 1, 1, 1 });
 
-	m_titleText = std::make_unique<kda::Text>(m_font);
-	m_titleText->Create(kda::g_renderer, "Create Your Own Bullet Hell", kda::Color{ 1, 1, 1, 1 });
+	m_titleText = std::make_unique<kda::Text>(kda::g_resources.Get<kda::Font>("ggtype.ttf", 24));
+	m_titleText->Create(kda::g_renderer, "AZTEROIDS", kda::Color{ 1, 1, 1, 1 });
 
-	m_gameoverText = std::make_unique<kda::Text>(m_font);
-	m_gameoverText->Create(kda::g_renderer, "Game Over", kda::Color{ 1, 1, 1, 1 });
+	m_gameOverText = std::make_unique<kda::Text>(kda::g_resources.Get<kda::Font>("ggtype.ttf", 24));
+	m_gameOverText->Create(kda::g_renderer, "GAME OVER", kda::Color{ 1, 1, 1, 1 });
 
-	m_hpText = std::make_unique<kda::Text>(m_font);
-	m_hpText->Create(kda::g_renderer, "HP: ", kda::Color{ 1, 1, 1, 1 });
-	
-	//load Audio
-	kda::g_audioSystem.AddAudio("Laser_shot", "Laser_Shoot.wav");
-	kda::g_audioSystem.AddAudio("Explosion", "Explosion.wav");
-	kda::g_audioSystem.AddAudio("Music", "Music.wav");
+	//Load audio
+	kda::g_audioSystem.AddAudio("hit", "Laser_Shoot.wav");
+	kda::g_audioSystem.AddAudio("music", "Music.wav");
 
 	//Scene
-	m_Scene = std::make_unique<kda::Scene>();
+	m_scene = std::make_unique<kda::Scene>();
 
 	return true;
 }
 
-void SpaceGame::Shutdown()
-{
+void SpaceGame::Shutdown() {
+
 }
 
-void SpaceGame::Update(float dt)
-{
+void SpaceGame::Update(float dt){
+
 	switch (m_state)
 	{
 	case SpaceGame::eState::Title:
-		if (kda::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE))
-		{
+		if (kda::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE)) {
 			m_state = eState::StartGame;
 		}
 		break;
@@ -58,37 +51,45 @@ void SpaceGame::Update(float dt)
 		m_score = 0;
 		m_lives = 3;
 		m_state = eState::StartLevel;
-		kda::g_audioSystem.PlayOneShot("Music", true);
+		kda::g_audioSystem.PlayOneShot("music", true);
 		break;
 	case SpaceGame::eState::StartLevel:
-		m_Scene->RemoveAll();
+		m_scene->RemoveAll();
 	{
-		std::unique_ptr<Player> player = std::make_unique<Player>(10.0f, kda::Pi, kda::Transform{ { 400, 300 }, 0, 6 }, kda::g_manager.get("Ship.txt"));
+		std::unique_ptr<Player> player = std::make_unique<Player>(20.0f, kda::pi, kda::Transform{ {400, 300}, 0, 3 });
 		player->m_tag = "Player";
 		player->m_game = this;
-		player->SetDamping(0.9f);
-		m_Scene->Add(move(player));
+
+		std::unique_ptr<kda::SpriteComponent> component = std::make_unique<kda::SpriteComponent>();
+		component->m_texture = kda::g_resources.Get<kda::Texture>("PlayerShip.png", kda::g_renderer);
+		player->AddComponent(std::move(component));
+
+		auto physicsComponent = std::make_unique<kda::EnginePhysicsComponent>();
+		physicsComponent->m_damping = 0.9f;
+		player->AddComponent(std::move(physicsComponent));
+
+		m_scene->Add(std::move(player));
 	}
-		m_state = eState::Game;
+	m_state = eState::Game;
 		break;
 	case SpaceGame::eState::Game:
 		m_spawnTimer += dt;
-		if (m_spawnTimer >= m_spawnTime)
-		{
+		if (m_spawnTimer >= m_spawnTime) {
 			m_spawnTimer = 0;
-			std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(kda::randomf(50.0f, 75.0f), kda::Pi, kda::Transform{ { kda::random(800), kda::random(600)}, kda::randomf(kda::TwoPi), 6}, kda::g_manager.get("Enemy.txt"));
+			std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(kda::randomf(75.0f, 150.0f), kda::pi, kda::Transform((float)(kda::random(800), kda::random(600)), (float)kda::random((int)(kda::pi2), 1)));
 			enemy->m_tag = "Enemy";
 			enemy->m_game = this;
-			m_Scene->Add(move(enemy));
 
-			AddPoints(100);
+			std::unique_ptr<kda::SpriteComponent> component = std::make_unique<kda::SpriteComponent>();
+			component->m_texture = kda::g_resources.Get<kda::Texture>("EnemyShip.png", kda::g_renderer);
+			enemy->AddComponent(std::move(component));
+
+			m_scene->Add(std::move(enemy));
 		}
-
 		break;
-
 	case eState::PlayerDeadStart:
 		m_stateTimer = 3;
-		if (m_lives == 0) m_state = eState::GameOver;
+		if (m_lives <= 0) m_state = eState::GameOver;
 		else m_state = eState::PlayerDead;
 		break;
 	case SpaceGame::eState::PlayerDead:
@@ -99,35 +100,29 @@ void SpaceGame::Update(float dt)
 		break;
 	case SpaceGame::eState::GameOver:
 		m_stateTimer -= dt;
-		if (m_stateTimer, +0) {
+		if (m_stateTimer <= 0) {
+			m_scene->RemoveAll();
 			m_state = eState::Title;
 		}
 		break;
 	default:
 		break;
 	}
-
-	m_scoreText->Create(kda::g_renderer, std::to_string(m_score), {1,1,1,1});
-	m_hpText->Create(kda::g_renderer, "HP: " + std::to_string(m_hp), { 1,1,1,1 });
-
-	m_Scene->Update(dt);
+	m_scoreText->Create(kda::g_renderer, "Score " + std::to_string(m_score), {1, 1, 1, 1});
+	m_scene->Update(dt);
 }
 
-void SpaceGame::Draw(kda::Renderer& renderer)
-{
-	if (m_state == eState::Title)
-	{
-		m_titleText->Draw(renderer, 150, 300);
+void SpaceGame::Draw(kda::Renderer& renderer){
+	if (m_state == eState::Title) {
+		m_titleText->Draw(renderer, 400, 300);
 	}
 
-	if (m_state == eState::GameOver)
-	{
-		m_gameoverText->Draw(renderer, 300, 300);
+	if (m_state == eState::GameOver) {
+		m_gameOverText->Draw(renderer, 400, 300);
 	}
 
-	if (m_state == eState::Game || m_state == eState::GameOver || m_state == eState::PlayerDeadStart || m_state == eState::PlayerDead) {
-		m_scoreText->Draw(renderer, 40, 40);
-		m_hpText->Draw(renderer, 650, 550);
-	}
-	m_Scene->Draw(renderer);
+	m_scoreText->Draw(renderer, 40, 20);
+	m_scene->Draw(renderer);
 }
+
+// Path: Source\Game\Game\SpaceGame.cpp

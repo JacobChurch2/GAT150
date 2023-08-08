@@ -174,22 +174,22 @@
   <ItemGroup>
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="PewPew.cpp" />
+    <ClCompile Include="Pew.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SpaceGame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Engine\Audio\Audio.vcxproj">
-      <Project>{24607029-1679-4820-9577-c7e2125ad564}</Project>
+      <Project>{5fdc2c42-90f4-41c3-a39e-24eb7fdc677f}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\Engine\Core\Core.vcxproj">
       <Project>{c3edf501-e478-4bfb-8c74-75f86caa7529}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\Engine\Framework\Framework.vcxproj">
-      <Project>{22bfa99b-cf39-4498-ada5-db666d4618de}</Project>
+      <Project>{c394d46d-ba0f-4d0a-ba53-b0a537f31913}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\Engine\Input\Input.vcxproj">
-      <Project>{7b815538-912b-4292-917c-e7bb543bc1fb}</Project>
+      <Project>{c9d66926-40a0-476f-af79-363e2b0ee83c}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\Engine\Render\Render.vcxproj">
       <Project>{2be129fb-064b-4c08-9248-4faf19632ea1}</Project>
@@ -197,7 +197,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h" />
-    <ClInclude Include="PewPew.h" />
+    <ClInclude Include="Pew.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SpaceGame.h" />
   </ItemGroup>

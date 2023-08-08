@@ -2,7 +2,6 @@
 namespace kda
 {
 	AudioSystem g_audioSystem;
-
 	bool AudioSystem::Initialize()
 	{
 		FMOD::System_Create(&m_fmodSystem);
@@ -36,7 +35,6 @@ namespace kda
 		if (iter != m_sounds.end())
 		{
 			FMOD::Sound* sound = iter->second;
-
 			sound->setMode(loop ? FMOD_LOOP_NORMAL : FMOD_LOOP_OFF);
 
 			FMOD::Channel* channel;

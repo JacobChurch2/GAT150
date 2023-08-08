@@ -1,16 +1,15 @@
 #pragma once
-#include "Core/Vector2.h"
-#include "Core/Color.h"
-#include "Render.h"
+#include "Core/Math/Vector2.h"
+#include "Core/Math/Color.h"
 
-namespace kda {
+namespace kda{
 	struct ParticleData
 	{
 		vec2 position;
 		vec2 prevPosition;
 		vec2 velocity;
 		float damping = 0;
-		Color color{ 0,0,0,0 };
+		Color color;
 		float lifetimer = 0;
 		float lifetime = 0;
 	};
@@ -25,10 +24,12 @@ namespace kda {
 			m_isActive = true;
 		}
 		void Update(float dt);
-		void Draw(Renderer& renderer);
+		void Draw(class Renderer& renderer);
 		friend class ParticleSystem;
 	private:
 		ParticleData m_data;
 		bool m_isActive = false;
 	};
 }
+
+

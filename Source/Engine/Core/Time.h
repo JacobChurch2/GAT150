@@ -3,7 +3,6 @@
 
 namespace kda
 {
-
 	class Time
 	{
 	private:
@@ -17,7 +16,7 @@ namespace kda
 			m_frameTime{ clock::now() }
 		{}
 
-		void Tick();
+		void tick();
 		void Reset() { m_startTime = clock::now(); }
 
 		clock_rep GetElapsedNanoseconds();
@@ -25,13 +24,12 @@ namespace kda
 		clock_rep GetElapsedMilliseconds();
 		float GetElapsedSeconds();
 
-		float GetTime() const { return m_time; }
-		float GetDeltaTime() const { return m_deltaTime * m_timeScale; }
-		float GetUnscaledDeltaTime() const { return m_deltaTime; }
+		float getTime() const { return m_time; };
+		float getDeltaTime() const { return m_deltaTime * m_timeScale; };
+		float getUnscaledDeltaTime() const { return m_deltaTime; };
 
-		float GetTimeScale() const { return m_timeScale; }
-		void SetTimeScale(float timeScale) { m_timeScale = timeScale; }
-
+		float getTimeScale() const { return m_timeScale; };
+		void setTimeScale(float timeScale) { m_timeScale = timeScale; }
 	private:
 		float m_time = 0;
 		float m_deltaTime = 0;

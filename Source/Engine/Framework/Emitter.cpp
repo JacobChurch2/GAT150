@@ -1,10 +1,10 @@
 #include "Emitter.h"
-#include "Render/Particle.h"
-#include "Render/ParticleSystem.h"
+#include <Render/Particle.h>
+#include <Render/ParticleSystem.h>
 
-namespace kda {
-	void Emitter::Update(float dt)
-	{
+namespace kda
+{
+	void Emitter::Update(float dt){
 		Actor::Update(dt);
 		// create burst particles
 		if (m_data.burst)
@@ -27,8 +27,7 @@ namespace kda {
 		}
 	}
 
-	void Emitter::Draw(kda::Renderer& renderer)
-	{
+	void Emitter::Draw(Renderer& renderer){
 		//
 	}
 
@@ -43,8 +42,7 @@ namespace kda {
 			data.position = m_transform.position;
 			data.prevPosition = data.position;
 			data.color = m_data.color;
-			float angle = m_transform.rotation + m_data.angle + randomf(-
-				m_data.angleRange, m_data.angleRange);
+			float angle = m_transform.rotation + m_data.angle + randomf(-m_data.angleRange, m_data.angleRange);
 			vec2 direction = vec2{ 0, -1 }.Rotate(angle);
 			data.velocity = direction * randomf(m_data.speedMin, m_data.speedMax);
 			data.damping = m_data.damping;

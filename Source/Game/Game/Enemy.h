@@ -1,24 +1,25 @@
 #pragma once
-#include "Framework/Actor.h"
+#include "./Framework/Actor.h"
 
-class Enemy : public kda::Actor
-{
+class Enemy : public kda::Actor {
 public:
-	Enemy(float speed, float turnRate, const kda::Transform& transform, std::shared_ptr<kda::Model> model) :
-		Actor{ transform, model },
+	Enemy(float speed, float turnRate, const kda::Transform& transform) :
+		Actor{ transform },
 		m_speed{ speed },
 		m_turnRate{ turnRate }
 	{
-		m_fireRate = 10.0f;
-		m_fireTimer = m_fireRate;
+		m_fireTime = 2.0f;
+		m_fireRate = m_fireTime;
 	}
+
 	void Update(float dt) override;
-	void OnCollision(Actor* actor) override;
+	void onCollision(Actor* actor) override;
+
 private:
 	float m_speed = 0;
 	float m_turnRate = 0;
 
+	float m_fireTime = 3.0f;
 	float m_fireRate = 0;
-	float m_fireTimer = 0;
 	int hp = 10;
 };

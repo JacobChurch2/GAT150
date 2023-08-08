@@ -77,18 +77,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(BinDir)</OutDir>
+    <IntDir>$(TempDir)</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(BinDir)</OutDir>
+    <IntDir>$(TempDir)</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(BinDir)</OutDir>
+    <IntDir>$(TempDir)</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(BinDir)</OutDir>
+    <IntDir>$(TempDir)</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -151,16 +155,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Color.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="fileIO.h" />
     <ClInclude Include="Logger.h" />
-    <ClInclude Include="MathUtils.h" />
+    <ClInclude Include="Math\Color.h" />
+    <ClInclude Include="Math\MathUTILS.h" />
+    <ClInclude Include="Math\Transform.h" />
+    <ClInclude Include="Math\Vector2.h" />
+    <ClInclude Include="Math\Vector3.h" />
     <ClInclude Include="Memory.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="Time.h" />
-    <ClInclude Include="Transform.h" />
-    <ClInclude Include="Vector2.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="fileIO.cpp" />

@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{24607029-1679-4820-9577-c7e2125ad564}</ProjectGuid>
+    <ProjectGuid>{5fdc2c42-90f4-41c3-a39e-24eb7fdc677f}</ProjectGuid>
     <RootNamespace>Audio</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -171,10 +171,10 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AudioSystem.h" />
+    <ClCompile Include="AudioSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AudioSystem.cpp" />
+    <ClInclude Include="AudioSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

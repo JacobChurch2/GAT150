@@ -9,8 +9,7 @@
 #define new DEBUG_NEW
 #endif // _DEBUG
 
-namespace kda
-{
+namespace kda{
 	class MemoryTracker
 	{
 	public:

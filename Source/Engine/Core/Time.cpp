@@ -1,18 +1,17 @@
 #include "Time.h"
-#include "MathUtils.h"
+#include "Math/MathUTILS.h"
 
 namespace kda
 {
 	Time g_time;
 
-	void Time::Tick()
-	{
+	void Time::tick() {
 		clock_duration duration = clock::now() - m_startTime;
 		m_time = duration.count() / static_cast<float>(clock_duration::period::den);
 
 		duration = clock::now() - m_frameTime;
 		m_deltaTime = duration.count() / static_cast<float>(clock_duration::period::den);
-		m_deltaTime = Min(m_deltaTime, 0.25f);
+		m_deltaTime = min(m_deltaTime, 0.25f);
 
 		m_frameTime = clock::now();
 	}

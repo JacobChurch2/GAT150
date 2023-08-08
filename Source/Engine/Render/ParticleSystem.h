@@ -1,9 +1,8 @@
 #pragma once
-#include "particle.h"
 #include <vector>
+#include "Particle.h"
 
 namespace kda {
-
 	class ParticleSystem
 	{
 	public:
@@ -13,11 +12,11 @@ namespace kda {
 			m_particles.resize(maxCount);
 		}
 		void Update(float dt);
-		void Draw(Renderer& renderer);
+		void Draw(class Renderer& renderer);
 		Particle* GetFreeParticle();
 	private:
 		std::vector<Particle> m_particles;
 	};
-
 	extern ParticleSystem g_particleSystem;
 }
+

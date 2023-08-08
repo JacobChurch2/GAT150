@@ -2,13 +2,11 @@
 #include <list>
 #include "Actor.h"
 
-namespace kda
-{
+namespace kda {
 	class Renderer;
 
-	class Scene
-	{
-	public :
+	class Scene {
+	public:
 		Scene() = default;
 
 		void Update(float dt);
@@ -28,10 +26,11 @@ namespace kda
 	template<typename T>
 	inline T* Scene::GetActor()
 	{
-		for (auto& actor : m_actors)
-		{
+		for (auto& actor : m_actors) {
 			T* result = dynamic_cast<T*>(actor.get());
-			if (result) return result;
+			if (result) {
+				return result;
+			}
 		}
 		return nullptr;
 	}

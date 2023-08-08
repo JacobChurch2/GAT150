@@ -1,16 +1,16 @@
 #include "Text.h"
 #include "Font.h"
 #include <SDL2-2.28.0/include/SDL_ttf.h>
-namespace kda
-{
+#include "Render.h"
+
+namespace kda{
+
 	Text::~Text()
 	{
 		if (m_texture) SDL_DestroyTexture(m_texture);
 	}
 	void Text::Create(Renderer& renderer, const std::string& text, const Color& color)
 	{
-		if (m_texture) SDL_DestroyTexture(m_texture);
-
 		SDL_Color c{ Color::ToInt(color.r), Color::ToInt(color.g), Color::ToInt(color.b), Color::ToInt(color.a) };
 		SDL_Surface* surface = TTF_RenderText_Solid(m_font->m_ttfFont, text.c_str(), c);
 		m_texture = SDL_CreateTextureFromSurface(renderer.m_renderer, surface);

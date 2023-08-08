@@ -2,33 +2,28 @@
 #include <iostream>
 #include "fileIO.h"
 
-namespace kda
-{
+namespace kda {
+
 	Logger g_logger(LogLevel::Info, &std::cout, "log.txt");
 
-	bool Logger::Log(LogLevel logLevel, const std::string filename, int line)
-	{
+	bool Logger::log(LogLevel logLevel, const std::string fileName, int line) {
 		if (logLevel < m_logLevel) return false;
-
-		switch (logLevel)
-		{
-		case kda::Info:
-			*this << "INFO: ";
-			break;
-		case kda::Warning:
-			*this << "WARNING: ";
-			break;
-		case kda::Error:
-			*this << "ERROR ";
-			break;
-		case kda::Assert:
-			*this << "ASSERT: ";
-			break;
-		default:
-			break;
-		}
-
-		*this << getFileName(filename) << "(" << line << ") ";
+		switch (m_logLevel) {
+			case LogLevel::Info:
+				*this << "Info: ";
+				break;
+			case LogLevel::Warning:
+				*this << "Warning: ";
+				break;
+			case LogLevel::Error:
+				*this << "Error: ";
+				break;
+			case LogLevel::Assert:
+				*this << "Assert: ";
+				break;
+				default: break;
+		}	
+		*this << getFileName(fileName) << "(" << line << ") ";
 
 		return true;
 	}

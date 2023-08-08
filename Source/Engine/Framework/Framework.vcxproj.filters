@@ -6,7 +6,10 @@
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
     <Filter Include="Source\Resource">
-      <UniqueIdentifier>{957d012a-2e20-462d-9abb-fa62b73904c7}</UniqueIdentifier>
+      <UniqueIdentifier>{ff5187db-a9b1-41b4-80e9-0f2c00a2fe60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Components">
+      <UniqueIdentifier>{1f7b163a-835d-4522-9247-c511fe06a83a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -19,8 +22,17 @@
     <ClCompile Include="Emitter.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Resource\ResourceManager.cpp">
+    <ClCompile Include="ResourceManager.cpp">
       <Filter>Source\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\ModelRenderComponent.cpp">
+      <Filter>Source\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\EnginePhysicsComponent.cpp">
+      <Filter>Source\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\SpriteComponent.cpp">
+      <Filter>Source\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -39,8 +51,29 @@
     <ClInclude Include="Resource\Resource.h">
       <Filter>Source\Resource</Filter>
     </ClInclude>
-    <ClInclude Include="Resource\ResourceManager.h">
+    <ClInclude Include="ResourceManager.h">
       <Filter>Source\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\Component.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\RenderComponent.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\ModelRenderComponent.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\PhysicsComponents.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\EnginePhysicsComponent.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\SpriteComponent.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework.h">
+      <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

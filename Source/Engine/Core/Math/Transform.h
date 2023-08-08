@@ -1,10 +1,9 @@
 #pragma once
-#include "Vector2.h"
+#include "Core/Math/Vector2.h"
 
-namespace kda 
-{
-	class Transform
-	{
+namespace kda {
+
+	class Transform {
 	public:
 		vec2 position;
 		float rotation = 0;
@@ -12,10 +11,10 @@ namespace kda
 
 	public:
 		Transform() = default;
-
 		Transform(const vec2& position, float rotation, float scale = 1) :
-			position{ position },
+			position{ position }, 
 			rotation{ rotation },
-			scale{ scale } {}
+			scale{ scale }
+		{}
 	};
 }

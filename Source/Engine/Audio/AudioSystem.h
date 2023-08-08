@@ -2,8 +2,8 @@
 #include <fmod/core/inc/fmod.hpp>
 #include <string>
 #include <map>
-namespace kda
-{
+namespace kda{
+
 	class AudioSystem
 	{
 	public:
@@ -13,7 +13,7 @@ namespace kda
 		void Shutdown();
 		void Update();
 		void AddAudio(const std::string& name, const std::string& filename);
-		void PlayOneShot(const std::string& name, bool loop = false);
+		void PlayOneShot(const std::string& name, bool loop = 0);
 	private:
 		FMOD::System* m_fmodSystem;
 		std::map<std::string, FMOD::Sound*> m_sounds;

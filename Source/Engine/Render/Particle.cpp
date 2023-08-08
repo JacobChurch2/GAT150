@@ -1,9 +1,9 @@
 #include "Particle.h"
+#include "Render.h"
 
-namespace kda {
-
-	void Particle::Update(float dt)
-	{
+namespace kda
+{
+	void kda::Particle::Update(float dt) {
 		m_data.lifetimer += dt;
 		if (m_data.lifetimer >= m_data.lifetime)
 		{
@@ -15,10 +15,11 @@ namespace kda {
 		m_data.velocity *= std::pow(1.0f - m_data.damping, dt);
 	}
 
-	void Particle::Draw(Renderer& renderer)
-	{
-		renderer.SetColor(Color::ToInt(m_data.color.r), Color::ToInt(m_data.color.g), Color::ToInt(m_data.color.b), Color::ToInt(m_data.color.a));
+	void kda::Particle::Draw(Renderer& renderer) {
+		renderer.SetColor(Color::ToInt(m_data.color.r),
+			Color::ToInt(m_data.color.g),
+			Color::ToInt(m_data.color.b),
+			Color::ToInt(m_data.color.a));
 		renderer.DrawLine(m_data.position.x, m_data.position.y, m_data.prevPosition.x, m_data.prevPosition.y);
 	}
-
 }
