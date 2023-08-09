@@ -1,14 +1,10 @@
 #include "Player.h"
-#include "Framework/Scene.h"
+#include "Framework/Framework.h"
 #include "Render/Renderer.h"
 #include "Pew.h"
 #include "SpaceGame.h"
-#include <Framework/Emitter.h>
-#include <Framework/Components/SpriteComponent.h>
-#include <Framework/ResourceManager.h>
-#include <Framework/Components/PhysicsComponents.h>
 #include "Input/InputSystem.h"
-
+#include "Framework/Components/ModelRenderComponent.h"
 
 void Player::Update(float dt) {
 	Actor::Update(dt);
@@ -52,12 +48,8 @@ void Player::Update(float dt) {
 
 	//fire weapon
 	int weaponSelect = 1;
-
-	if (kda::g_inputSystem.GetKeyDown(SDL_SCANCODE_1)) weaponSelect = 1;
-	if (kda::g_inputSystem.GetKeyDown(SDL_SCANCODE_2)) weaponSelect = 2;
 		
-	if (kda::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) 
-		&& !kda::g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_SPACE)) {
+	if (kda::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) && !kda::g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_SPACE)) {
 
 		if (weaponSelect == 1) {
 			kda::Transform transform1{m_transform.position, m_transform.rotation, 1};
@@ -69,30 +61,18 @@ void Player::Update(float dt) {
 			pew->AddComponent(std::move(component));
 			m_scene->Add(std::move(pew));
 		}
+	}
 
-		//Create Weapon
-		if (weaponSelect == 2) {
-			//Weapon 1
-			kda::Transform transform1{m_transform.position, m_transform.rotation + kda::DegreesToRadians(5.0f), 1};
-			std::unique_ptr<Pew> pew = std::make_unique<Pew>( 400.0f, transform1);
-			pew->m_tag = "Player";
+	//Big Weapon
+	if (kda::g_inputSystem.GetKeyDown(SDL_SCANCODE_V) && !kda::g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_V)) {
+		kda::Transform transform1{m_transform.position, m_transform.rotation + kda::DegreesToRadians(5.0f), 10};
+		std::unique_ptr<Pew> pew = std::make_unique<Pew>(400.0f, transform1);
+		pew->m_tag = "Player";
 
-			std::unique_ptr<kda::SpriteComponent> component = std::make_unique<kda::SpriteComponent>();
-			component->m_texture = kda::g_resources.Get<kda::Texture>("PlayerBullet.png", kda::g_renderer);
-			pew->AddComponent(std::move(component));
-			m_scene->Add(std::move(pew));
-
-			//Weapon 2
-			kda::Transform transform2{m_transform.position, m_transform.rotation - kda::DegreesToRadians(5.0f), 1};
-			std::unique_ptr<Pew> pew2 = std::make_unique<Pew>(400.0f, transform2);
-			pew2->m_tag = "Player";
-
-			component = std::make_unique<kda::SpriteComponent>();
-			component->m_texture = kda::g_resources.Get<kda::Texture>("PlayerBullet.png", kda::g_renderer);
-			pew2->AddComponent(std::move(component));
-			m_scene->Add(std::move(pew2));
-		}
-		
+		std::unique_ptr<kda::ModelRenderComponent> component = std::make_unique<kda::ModelRenderComponent>();
+		component->m_model = kda::g_resources.Get<kda::Model>("PlayerShip.txt");
+		pew->AddComponent(std::move(component));
+		m_scene->Add(std::move(pew));
 	}
 
 	if (kda::g_inputSystem.GetKeyDown(SDL_SCANCODE_T)) kda::g_time.setTimeScale(0.5f);

@@ -1,5 +1,6 @@
 #pragma once
 #include "Core/Math/Vector2.h"
+#include "Core/Math/Matrix22.h"
 
 namespace kda {
 
@@ -16,5 +17,13 @@ namespace kda {
 			rotation{ rotation },
 			scale{ scale }
 		{}
+
+		mat2 GetMatrix() const
+		{
+			mat2 ms = mat2::CreateScale(scale);
+			mat2 mr = mat2::CreateRotation(rotation);
+
+			return ms * mr;
+		}
 	};
 }

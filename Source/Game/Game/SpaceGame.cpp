@@ -10,7 +10,6 @@
 #include "Render/Text.h"
 #include "Render/ParticleSystem.h"
 #include "Render/Particle.h"
-#include "Framework/Emitter.h"
 
 bool SpaceGame::Initialize(){
 	//Create fonts/ text objects
@@ -56,12 +55,13 @@ void SpaceGame::Update(float dt){
 	case SpaceGame::eState::StartLevel:
 		m_scene->RemoveAll();
 	{
-		std::unique_ptr<Player> player = std::make_unique<Player>(20.0f, kda::pi, kda::Transform{ {400, 300}, 0, 3 });
+		std::unique_ptr<Player> player = std::make_unique<Player>(20.0f, kda::pi, kda::Transform{ {400, 300}, 0, 1 });
 		player->m_tag = "Player";
 		player->m_game = this;
 
-		std::unique_ptr<kda::SpriteComponent> component = std::make_unique<kda::SpriteComponent>();
-		component->m_texture = kda::g_resources.Get<kda::Texture>("PlayerShip.png", kda::g_renderer);
+		//create components
+		std::unique_ptr<kda::ModelRenderComponent> component = std::make_unique<kda::ModelRenderComponent>();
+		component->m_model = kda::g_resources.Get<kda::Model>("PlayerShip.txt");
 		player->AddComponent(std::move(component));
 
 		auto physicsComponent = std::make_unique<kda::EnginePhysicsComponent>();
