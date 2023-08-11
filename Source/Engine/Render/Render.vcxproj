@@ -175,6 +175,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Audio\AudioSystem.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="Particle.cpp" />
@@ -184,6 +185,7 @@
     <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Audio\AudioSystem.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Particle.h" />

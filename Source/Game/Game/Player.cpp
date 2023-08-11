@@ -6,6 +6,25 @@
 #include "Input/InputSystem.h"
 #include "Framework/Components/ModelRenderComponent.h"
 
+bool Player::Initialize()
+{
+	Actor::Initialize();
+
+	m_physicsComponent = GetComponent<kda::PhysicsComponent>();
+	auto collisionComponent = GetComponent<kda::CollisionComponent>();
+	if (collisionComponent)
+	{
+		auto renderComponent = GetComponent<kda::RenderComponent>();
+		if (renderComponent)
+		{
+			float scale = m_transform.scale;
+			collisionComponent->m_radius = renderComponent->GetRadius() * scale;
+		}
+	}
+	
+	return true;
+}
+
 void Player::Update(float dt) {
 	Actor::Update(dt);
 
@@ -39,8 +58,7 @@ void Player::Update(float dt) {
 
 	kda::vec2 forward = kda::vec2{ 0, -1 }.Rotate(m_transform.rotation);
 
-	auto physicsComponent = GetComponent<kda::PhysicsComponent>();
-	physicsComponent->ApplyForce(forward * m_speed * thrust);
+	m_physicsComponent->ApplyForce(forward * m_speed * thrust);
 
 	//m_transform.position += forward * m_speed * thrust * kda::g_time.getDeltaTime();
 	m_transform.position.x = kda::wrap(m_transform.position.x, (float)kda::g_renderer.GetWidth());
@@ -59,6 +77,12 @@ void Player::Update(float dt) {
 			std::unique_ptr<kda::SpriteComponent> component = std::make_unique<kda::SpriteComponent>();
 			component->m_texture = kda::g_resources.Get<kda::Texture>("PlayerBullet.png", kda::g_renderer);
 			pew->AddComponent(std::move(component));
+
+			auto collisionComponent = std::make_unique<kda::CircleCollisionComponent>();
+			collisionComponent->m_radius = 30.0f;
+			pew->AddComponent(std::move(collisionComponent));
+
+			pew->Initialize();
 			m_scene->Add(std::move(pew));
 		}
 	}
@@ -72,11 +96,19 @@ void Player::Update(float dt) {
 		std::unique_ptr<kda::ModelRenderComponent> component = std::make_unique<kda::ModelRenderComponent>();
 		component->m_model = kda::g_resources.Get<kda::Model>("PlayerShip.txt");
 		pew->AddComponent(std::move(component));
+
+		auto collisionComponent = std::make_unique<kda::CircleCollisionComponent>();
+		collisionComponent->m_radius = 30.0f;
+		pew->AddComponent(std::move(collisionComponent));
+
+		pew->Initialize();
 		m_scene->Add(std::move(pew));
 	}
 
 	if (kda::g_inputSystem.GetKeyDown(SDL_SCANCODE_T)) kda::g_time.setTimeScale(0.5f);
 	else kda::g_time.setTimeScale(1.0f);
+
+	//std::cout << m_transform.position.x << " " << m_transform.position.y << std::endl;
 }
 
 void Player::onCollision(Actor* actor){

@@ -60,14 +60,19 @@ void SpaceGame::Update(float dt){
 		player->m_game = this;
 
 		//create components
-		std::unique_ptr<kda::ModelRenderComponent> component = std::make_unique<kda::ModelRenderComponent>();
-		component->m_model = kda::g_resources.Get<kda::Model>("PlayerShip.txt");
+		std::unique_ptr<kda::SpriteComponent> component = std::make_unique<kda::SpriteComponent>();
+		component->m_texture = kda::g_resources.Get<kda::Texture>("PlayerShip.png", kda::g_renderer);
 		player->AddComponent(std::move(component));
 
 		auto physicsComponent = std::make_unique<kda::EnginePhysicsComponent>();
 		physicsComponent->m_damping = 0.9f;
 		player->AddComponent(std::move(physicsComponent));
 
+		auto collisionComponent = std::make_unique<kda::CircleCollisionComponent>();
+		collisionComponent->m_radius = 30.0f;
+		player->AddComponent(std::move(collisionComponent));
+
+		player->Initialize();
 		m_scene->Add(std::move(player));
 	}
 	m_state = eState::Game;
@@ -84,6 +89,11 @@ void SpaceGame::Update(float dt){
 			component->m_texture = kda::g_resources.Get<kda::Texture>("EnemyShip.png", kda::g_renderer);
 			enemy->AddComponent(std::move(component));
 
+			auto collisionComponent = std::make_unique<kda::CircleCollisionComponent>();
+			collisionComponent->m_radius = 30.0f;
+			enemy->AddComponent(std::move(collisionComponent));
+
+			enemy->Initialize();
 			m_scene->Add(std::move(enemy));
 		}
 		break;

@@ -22,17 +22,20 @@
     <ClCompile Include="Emitter.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="ResourceManager.cpp">
+    <ClCompile Include="Resource\ResourceManager.cpp">
       <Filter>Source\Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\ModelRenderComponent.cpp">
-      <Filter>Source\Components</Filter>
     </ClCompile>
     <ClCompile Include="Components\EnginePhysicsComponent.cpp">
       <Filter>Source\Components</Filter>
     </ClCompile>
+    <ClCompile Include="Components\ModelRenderComponent.cpp">
+      <Filter>Source\Components</Filter>
+    </ClCompile>
     <ClCompile Include="Components\SpriteComponent.cpp">
       <Filter>Source\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\CircleCollisionComponent.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -48,16 +51,16 @@
     <ClInclude Include="Emitter.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Resource\Resource.h">
+    <ClInclude Include="Resource\ResourceManager.h">
       <Filter>Source\Resource</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceManager.h">
+    <ClInclude Include="Resource\Resource.h">
       <Filter>Source\Resource</Filter>
     </ClInclude>
     <ClInclude Include="Components\Component.h">
       <Filter>Source\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Components\RenderComponent.h">
+    <ClInclude Include="Components\EnginePhysicsComponent.h">
       <Filter>Source\Components</Filter>
     </ClInclude>
     <ClInclude Include="Components\ModelRenderComponent.h">
@@ -66,14 +69,23 @@
     <ClInclude Include="Components\PhysicsComponents.h">
       <Filter>Source\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Components\EnginePhysicsComponent.h">
+    <ClInclude Include="Components\RenderComponent.h">
       <Filter>Source\Components</Filter>
     </ClInclude>
     <ClInclude Include="Components\SpriteComponent.h">
       <Filter>Source\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Source</Filter>
+    </ClInclude>
     <ClInclude Include="Framework.h">
       <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\CollisionComponent.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\CircleCollisionComponent.h">
+      <Filter>Source\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

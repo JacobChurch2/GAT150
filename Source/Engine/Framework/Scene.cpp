@@ -1,4 +1,5 @@
 #include "Scene.h"
+#include "Framework/Components/CollisionComponent.h"
 
 void kda::Scene::Update(float dt){
 	//update and remove destroyed actors
@@ -12,10 +13,12 @@ void kda::Scene::Update(float dt){
 	for (auto iter1 = m_actors.begin(); iter1 != m_actors.end(); iter1++) {
 		for (auto iter2 = std::next(iter1, 1); iter2 != m_actors.end(); iter2++) {
 
-			float distance = (*iter1)->m_transform.position.distance((*iter2)->m_transform.position);
-			float radius = (*iter1)->GetRadius() + (*iter2)->GetRadius();
+			CollisionComponent* collision1 = (*iter1)->GetComponent<CollisionComponent>();
+			CollisionComponent* collision2 = (*iter2)->GetComponent<CollisionComponent>();
 
-			if (distance <= radius) {
+			if (collision1 == nullptr || collision2 == nullptr) continue;
+
+			if (collision1->CheckCollision(collision2)) {
 				(*iter1)->onCollision(iter2->get());
 				(*iter2)->onCollision(iter1->get());
 			}

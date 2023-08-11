@@ -2,7 +2,7 @@
 #include <map>
 #include <memory>
 #include <string>
-#include "Framework/Resource/Resource.h"
+#include "Resource.h"
 
 namespace kda
 {

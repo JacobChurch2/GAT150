@@ -2,11 +2,25 @@
 #include "Player.h"
 #include "Pew.h"
 #include "SpaceGame.h"
-#include "./Framework/Scene.h"
 #include "Render/Renderer.h"
-#include <Framework/Emitter.h>
-#include "Framework/Components/SpriteComponent.h"
-#include "Framework/ResourceManager.h"
+#include "Framework/Framework.h"
+
+bool Enemy::Initialize() {
+	Actor::Initialize();
+
+	auto collisionComponent = GetComponent<kda::CollisionComponent>();
+	if (collisionComponent)
+	{
+		auto renderComponent = GetComponent<kda::RenderComponent>();
+		if (renderComponent)
+		{
+			float scale = m_transform.scale;
+			collisionComponent->m_radius = renderComponent->GetRadius() * scale;
+		}
+	}
+
+	return true;
+}
 
 void Enemy::Update(float dt) {
 
@@ -32,6 +46,12 @@ void Enemy::Update(float dt) {
 		std::unique_ptr<kda::SpriteComponent> component = std::make_unique<kda::SpriteComponent>();
 		component->m_texture = kda::g_resources.Get<kda::Texture>("EnemyBullet.png", kda::g_renderer);
 		pew->AddComponent(std::move(component));
+
+		auto collisionComponent = std::make_unique<kda::CircleCollisionComponent>();
+		collisionComponent->m_radius = 30.0f;
+		pew->AddComponent(std::move(collisionComponent));
+
+		pew->Initialize();
 		m_scene->Add(std::move(pew));
 
 		m_fireRate = m_fireTime;

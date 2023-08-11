@@ -1,13 +1,14 @@
 #pragma once
+#include "Framework/Object.h"
 
 namespace kda {
-	class Component {
-		public:
-			virtual void Update(float dt) = 0;
-			friend class Actor;
+	class Component : public Object 
+	{
+	public:
+		virtual void Update(float dt) = 0;
+		friend class Actor;
 
-		protected:
-
-			class Actor* m_owner = nullptr;
+	public:
+		class Actor* m_owner = nullptr;
 	};
 }

@@ -3,6 +3,9 @@
 
 class Enemy : public kda::Actor {
 public:
+
+	bool Initialize() override;
+
 	Enemy(float speed, float turnRate, const kda::Transform& transform) :
 		Actor{ transform },
 		m_speed{ speed },

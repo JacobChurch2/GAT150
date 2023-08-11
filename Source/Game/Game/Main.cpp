@@ -78,7 +78,7 @@ int main(int argc, char* argv[])
 	kda::vec2 position{ 400, 300};
 
 	float speed = 200;
-	float turnRate = kda::DegreesToRadians(180);
+	//float turnRate = kda::DegreesToRadians(180);
 
 	// Main game loop
 	bool quit = false;
