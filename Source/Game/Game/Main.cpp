@@ -48,11 +48,41 @@ void print(const std::string& s, const T& container)
 
 int main(int argc, char* argv[]) 
 {
+	kda::Factory::Instance().Register<kda::SpriteComponent>("SpriteComponent");
+
+
 	INFO_LOG("Hello World!")
 
 	kda::MemoryTracker::Initialize();
 	kda::seedRandom((unsigned int)time(nullptr));
 	kda::setFilePath("Assets");
+
+	rapidjson::Document document;
+	kda::Json::Load("Json.txt", document);
+
+	int i1;
+	kda::Json::Read(document, "integer1", i1);
+	std::cout << i1 << std::endl;
+
+	int i2;
+	kda::Json::Read(document, "integer2", i2);
+	std::cout << i2 << std::endl;
+
+	std::string str;
+	kda::Json::Read(document, "string", str);
+	std::cout << str << std::endl;
+
+	bool b;
+	kda::Json::Read(document, "boolean", b);
+	std::cout << b << std::endl;
+
+	float f;
+	kda::Json::Read(document, "float", f);
+	std::cout << f << std::endl;
+
+	kda::vec2 v2;
+	kda::Json::Read(document, "vector2", v2);
+	std::cout << v2 << std::endl;
 
 	//Initialize game engine
 	kda::g_audioSystem.Initialize();

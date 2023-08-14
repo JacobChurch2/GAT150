@@ -180,7 +180,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Engine\Audio\Audio.vcxproj">
-      <Project>{5fdc2c42-90f4-41c3-a39e-24eb7fdc677f}</Project>
+      <Project>{d82e01d1-9c85-4929-95dc-57da302fa297}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\Engine\Core\Core.vcxproj">
       <Project>{c3edf501-e478-4bfb-8c74-75f86caa7529}</Project>
@@ -189,7 +189,7 @@
       <Project>{c394d46d-ba0f-4d0a-ba53-b0a537f31913}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\Engine\Input\Input.vcxproj">
-      <Project>{c9d66926-40a0-476f-af79-363e2b0ee83c}</Project>
+      <Project>{5b2a08bb-61f1-40f8-9f81-21718186ef71}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\Engine\Render\Render.vcxproj">
       <Project>{2be129fb-064b-4c08-9248-4faf19632ea1}</Project>

@@ -13,14 +13,14 @@
 
 bool SpaceGame::Initialize(){
 	//Create fonts/ text objects
-	//m_font = kda::g_resources.Get<kda::Font>("MetalRocker.ttf", 24);
-	m_scoreText = std::make_unique<kda::Text>(kda::g_resources.Get<kda::Font>("ggtype.ttf", 24));
+	m_font = GET_RESOURCE(kda::Font, "ggtype.ttf", 24);
+	m_scoreText = std::make_unique<kda::Text>(GET_RESOURCE(kda::Font, "ggtype.ttf", 24));
 	m_scoreText->Create(kda::g_renderer, "0000", kda::Color{ 1, 1, 1, 1 });
 
-	m_titleText = std::make_unique<kda::Text>(kda::g_resources.Get<kda::Font>("ggtype.ttf", 24));
+	m_titleText = std::make_unique<kda::Text>(GET_RESOURCE(kda::Font, "ggtype.ttf", 24));
 	m_titleText->Create(kda::g_renderer, "AZTEROIDS", kda::Color{ 1, 1, 1, 1 });
 
-	m_gameOverText = std::make_unique<kda::Text>(kda::g_resources.Get<kda::Font>("ggtype.ttf", 24));
+	m_gameOverText = std::make_unique<kda::Text>(GET_RESOURCE(kda::Font, "ggtype.ttf", 24));
 	m_gameOverText->Create(kda::g_renderer, "GAME OVER", kda::Color{ 1, 1, 1, 1 });
 
 	//Load audio
@@ -60,8 +60,8 @@ void SpaceGame::Update(float dt){
 		player->m_game = this;
 
 		//create components
-		std::unique_ptr<kda::SpriteComponent> component = std::make_unique<kda::SpriteComponent>();
-		component->m_texture = kda::g_resources.Get<kda::Texture>("PlayerShip.png", kda::g_renderer);
+		auto component = kda::Factory::Instance().Create<kda::SpriteComponent>("SpriteComponent");
+		component->m_texture = GET_RESOURCE(kda::Texture, "PlayerShip.png", kda::g_renderer);
 		player->AddComponent(std::move(component));
 
 		auto physicsComponent = std::make_unique<kda::EnginePhysicsComponent>();
@@ -86,7 +86,7 @@ void SpaceGame::Update(float dt){
 			enemy->m_game = this;
 
 			std::unique_ptr<kda::SpriteComponent> component = std::make_unique<kda::SpriteComponent>();
-			component->m_texture = kda::g_resources.Get<kda::Texture>("EnemyShip.png", kda::g_renderer);
+			component->m_texture = GET_RESOURCE(kda::Texture, "EnemyShip.png", kda::g_renderer);
 			enemy->AddComponent(std::move(component));
 
 			auto collisionComponent = std::make_unique<kda::CircleCollisionComponent>();

@@ -3,10 +3,13 @@
 #include <memory>
 #include <string>
 #include "Resource.h"
+#include "Framework/Singleton.h"
+
+#define GET_RESOURCE(type, filename, ...) kda::ResourceManager::Instance().Get<type>(filename, __VA_ARGS__)
 
 namespace kda
 {
-	class ResourceManager
+	class ResourceManager : public Singleton<ResourceManager>
 	{
 	public:
 		template<typename T, typename ... TArgs>
@@ -30,5 +33,4 @@ namespace kda
 		return resource;
 	}
 
-	extern ResourceManager g_resources;
 }

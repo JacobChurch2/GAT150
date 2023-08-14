@@ -75,7 +75,7 @@ void Player::Update(float dt) {
 			pew->m_tag = "Player";
 
 			std::unique_ptr<kda::SpriteComponent> component = std::make_unique<kda::SpriteComponent>();
-			component->m_texture = kda::g_resources.Get<kda::Texture>("PlayerBullet.png", kda::g_renderer);
+			component->m_texture = GET_RESOURCE(kda::Texture, "PlayerBullet.png", kda::g_renderer);
 			pew->AddComponent(std::move(component));
 
 			auto collisionComponent = std::make_unique<kda::CircleCollisionComponent>();
@@ -89,12 +89,12 @@ void Player::Update(float dt) {
 
 	//Big Weapon
 	if (kda::g_inputSystem.GetKeyDown(SDL_SCANCODE_V) && !kda::g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_V)) {
-		kda::Transform transform1{m_transform.position, m_transform.rotation + kda::DegreesToRadians(5.0f), 10};
+		kda::Transform transform1{m_transform.position, m_transform.rotation, 10};
 		std::unique_ptr<Pew> pew = std::make_unique<Pew>(400.0f, transform1);
 		pew->m_tag = "Player";
 
 		std::unique_ptr<kda::ModelRenderComponent> component = std::make_unique<kda::ModelRenderComponent>();
-		component->m_model = kda::g_resources.Get<kda::Model>("PlayerShip.txt");
+		component->m_model = GET_RESOURCE(kda::Model, "PlayerShip.txt");
 		pew->AddComponent(std::move(component));
 
 		auto collisionComponent = std::make_unique<kda::CircleCollisionComponent>();

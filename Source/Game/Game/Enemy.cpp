@@ -44,7 +44,7 @@ void Enemy::Update(float dt) {
 		pew->m_tag = "Enemy";
 
 		std::unique_ptr<kda::SpriteComponent> component = std::make_unique<kda::SpriteComponent>();
-		component->m_texture = kda::g_resources.Get<kda::Texture>("EnemyBullet.png", kda::g_renderer);
+		component->m_texture = GET_RESOURCE(kda::Texture, "EnemyBullet.png", kda::g_renderer);
 		pew->AddComponent(std::move(component));
 
 		auto collisionComponent = std::make_unique<kda::CircleCollisionComponent>();
