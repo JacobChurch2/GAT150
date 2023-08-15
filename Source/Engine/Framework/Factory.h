@@ -2,7 +2,10 @@
 #include <memory>
 #include <map>
 #include <string>
+#include "Core/Logger.h"
 #include "Singleton.h"
+
+#define CREATE_CLASS(classname) kda::Factory::Instance().Create<kda::classname>(#classname);
 
 namespace kda 
 {
@@ -33,6 +36,11 @@ namespace kda
 		template<typename T>
 		std::unique_ptr<T> Create(const std::string& key);
 
+		friend class Singleton;
+
+	protected:
+		Factory() = default;
+
 	private:
 		std::map<std::string, std::unique_ptr<CreatorBase>> m_registry;
 	};
@@ -41,6 +49,7 @@ namespace kda
 	template<typename T>
 	inline void Factory::Register(const std::string& key)
 	{
+		INFO_LOG("Class registered: " << key);
 		m_registry[key] = std::make_unique<Creator<T>>();
 	}
 

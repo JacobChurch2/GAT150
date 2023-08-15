@@ -2,6 +2,8 @@
 #include "Framework/Actor.h"
 
 namespace kda {
+	CLASS_DEFINITION(ModelRenderComponent)
+
 	void ModelRenderComponent::Update(float dt) 
 	{
 

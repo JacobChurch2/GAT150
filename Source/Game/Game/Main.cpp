@@ -48,8 +48,6 @@ void print(const std::string& s, const T& container)
 
 int main(int argc, char* argv[]) 
 {
-	kda::Factory::Instance().Register<kda::SpriteComponent>("SpriteComponent");
-
 
 	INFO_LOG("Hello World!")
 

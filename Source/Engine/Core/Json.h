@@ -3,6 +3,9 @@
 #include <string>
 #include "Math/Vector2.h"
 
+#define READ_DATA(value, data) kda::Json::Read(value, #data, data);
+#define READ_DATA_REQUIRED(value, data) kda::Json::Read(value, #data, data, true);
+
 namespace kda
 {
 	class Json

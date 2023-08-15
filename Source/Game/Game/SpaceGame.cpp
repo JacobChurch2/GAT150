@@ -60,15 +60,15 @@ void SpaceGame::Update(float dt){
 		player->m_game = this;
 
 		//create components
-		auto component = kda::Factory::Instance().Create<kda::SpriteComponent>("SpriteComponent");
+		auto component = CREATE_CLASS(SpriteComponent);
 		component->m_texture = GET_RESOURCE(kda::Texture, "PlayerShip.png", kda::g_renderer);
 		player->AddComponent(std::move(component));
 
-		auto physicsComponent = std::make_unique<kda::EnginePhysicsComponent>();
+		auto physicsComponent = CREATE_CLASS(EnginePhysicsComponent);
 		physicsComponent->m_damping = 0.9f;
 		player->AddComponent(std::move(physicsComponent));
 
-		auto collisionComponent = std::make_unique<kda::CircleCollisionComponent>();
+		auto collisionComponent = CREATE_CLASS(CircleCollisionComponent);
 		collisionComponent->m_radius = 30.0f;
 		player->AddComponent(std::move(collisionComponent));
 

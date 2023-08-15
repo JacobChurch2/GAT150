@@ -3,6 +3,8 @@
 #include "../Actor.h"
 
 namespace kda {
+	CLASS_DEFINITION(SpriteComponent)
+
 	void kda::SpriteComponent::Update(float dt){
 
 	}
