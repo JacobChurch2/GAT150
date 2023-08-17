@@ -2,6 +2,7 @@
 #include "Core/Math/Vector2.h"
 #include "Core/Math/Matrix22.h"
 #include "Core/Math/Matrix33.h"
+#include "Core/Json.h"
 
 namespace kda {
 
@@ -28,5 +29,7 @@ namespace kda {
 
 			return mx;
 		}
+
+		void Read(const json_t& value);
 	};
 }

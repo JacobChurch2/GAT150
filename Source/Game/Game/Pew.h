@@ -1,20 +1,25 @@
 #pragma once
-#include "./Framework/Actor.h"
+#include "Framework/Actor.h"
 
-class Pew : public kda::Actor {
-public:
-	Pew(float speed, const kda::Transform& transform) :
-		Actor{ transform },
-		m_speed{ speed }
-	{
-		m_lifespan = 2.0f;
-	}
+namespace kda {
+	class Pew : public Actor {
+	public:
+		/*
+		Pew(float speed, const kda::Transform& transform) :
+			Actor{ transform },
+			m_speed{ speed }
+		{
+			lifespan = 2.0f;
+		}
+		*/
 
-	bool Initialize() override;
-	void Update(float dt) override;
-	void onCollision(Actor* actor) override;
+		bool Initialize() override;
+		void Update(float dt) override;
+		void onCollision(Actor* actor);
+		void Read(const json_t& value);
 
-private:
-	float m_speed = 0;
-	float m_turnRate = 0;
-};
+	private:
+		float speed = 0;
+		float turnRate = 0;
+	};
+}

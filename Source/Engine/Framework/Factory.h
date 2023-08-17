@@ -6,6 +6,7 @@
 #include "Singleton.h"
 
 #define CREATE_CLASS(classname) kda::Factory::Instance().Create<kda::classname>(#classname);
+#define CREATE_CLASS_BASE(classbase, classname) kda::Factory::Instance().Create<kda::classbase>(classname);
 
 namespace kda 
 {

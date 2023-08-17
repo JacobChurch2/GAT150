@@ -8,42 +8,43 @@
 
 namespace kda {
 	class Actor : public Object {
-		public:
-			CLASS_DECLARATION(Actor)
+	public:
+		CLASS_DECLARATION(Actor)
 
-			Actor() = default;
-			Actor(const kda::Transform& transform) :
-				m_transform{ transform }
-			{}
+		Actor() = default;
+		Actor(const kda::Transform& transform) :
+			transform{ transform }
+		{}
 
-			virtual bool Initialize() override;
-			virtual void OnDestroy() override;
+		virtual bool Initialize() override;
+		virtual void OnDestroy() override;
+		
+		virtual void Update(float dt);
+		virtual void Draw(kda::Renderer& renderer);
 
-			virtual void Update(float dt);
-			virtual void Draw(kda::Renderer& renderer);
-
-			void AddComponent(std::unique_ptr<Component> component);
-			template<typename T>
-			T* GetComponent();
-
-			float GetRadius() { return 30.0f; }
-			virtual void onCollision(Actor* other) {}
+		void AddComponent(std::unique_ptr<Component> component);
+		template<typename T>
+		T* GetComponent();
+		
+		float GetRadius() { return 30.0f; }
+		virtual void onCollision(Actor* other) {}
 			
-			class Scene* m_scene = nullptr;
-			friend class Scene;
+		class Scene* m_scene = nullptr;
+		friend class Scene;
 
-			class Game* m_game = nullptr;
+		class Game* m_game = nullptr;
 			
-			kda::Transform m_transform;
-			std::string m_tag;
+	public:
+		kda::Transform transform;
+		std::string tag;
 			
-			float m_lifespan = -1.0f;
+		float lifespan = -1.0f;
+		bool destroyed = false;
 
-		protected:
-			std::vector<std::unique_ptr<class Component>> m_components;
-
-			bool m_destroyed = false;
+	protected:
+		std::vector<std::unique_ptr<class Component>> m_components;
 	};
+
 	template<typename T>
 	inline T* Actor::GetComponent()
 	{

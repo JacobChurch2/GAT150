@@ -29,6 +29,8 @@ bool SpaceGame::Initialize(){
 
 	//Scene
 	m_scene = std::make_unique<kda::Scene>();
+	m_scene->Load("Scene.json");
+	m_scene->Initialize();
 
 	return true;
 }
@@ -56,7 +58,7 @@ void SpaceGame::Update(float dt){
 		m_scene->RemoveAll();
 	{
 		std::unique_ptr<Player> player = std::make_unique<Player>(20.0f, kda::pi, kda::Transform{ {400, 300}, 0, 1 });
-		player->m_tag = "Player";
+		player->tag = "Player";
 		player->m_game = this;
 
 		//create components
@@ -82,7 +84,7 @@ void SpaceGame::Update(float dt){
 		if (m_spawnTimer >= m_spawnTime) {
 			m_spawnTimer = 0;
 			std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(kda::randomf(75.0f, 150.0f), kda::pi, kda::Transform((float)(kda::random(800), kda::random(600)), (float)kda::random((int)(kda::pi2), 1)));
-			enemy->m_tag = "Enemy";
+			enemy->tag = "Enemy";
 			enemy->m_game = this;
 
 			std::unique_ptr<kda::SpriteComponent> component = std::make_unique<kda::SpriteComponent>();
@@ -123,6 +125,8 @@ void SpaceGame::Update(float dt){
 }
 
 void SpaceGame::Draw(kda::Renderer& renderer){
+	m_scene->Draw(renderer);
+
 	if (m_state == eState::Title) {
 		m_titleText->Draw(renderer, 400, 300);
 	}
@@ -132,7 +136,6 @@ void SpaceGame::Draw(kda::Renderer& renderer){
 	}
 
 	m_scoreText->Draw(renderer, 40, 20);
-	m_scene->Draw(renderer);
 }
 
 // Path: Source\Game\Game\SpaceGame.cpp

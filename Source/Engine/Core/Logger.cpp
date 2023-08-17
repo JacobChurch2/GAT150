@@ -4,8 +4,6 @@
 
 namespace kda {
 
-	Logger g_logger(LogLevel::Info, &std::cout, "log.txt");
-
 	bool Logger::log(LogLevel logLevel, const std::string fileName, int line) {
 		if (logLevel < m_logLevel) return false;
 		switch (m_logLevel) {

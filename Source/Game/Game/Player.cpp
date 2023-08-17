@@ -17,7 +17,7 @@ bool Player::Initialize()
 		auto renderComponent = GetComponent<kda::RenderComponent>();
 		if (renderComponent)
 		{
-			float scale = m_transform.scale;
+			float scale = transform.scale;
 			collisionComponent->m_radius = renderComponent->GetRadius() * scale;
 		}
 	}
@@ -32,7 +32,7 @@ void Player::Update(float dt) {
 	float rotate = 0;
 	if (kda::g_inputSystem.GetKeyDown(SDL_SCANCODE_LEFT)) rotate = -1;
 	if (kda::g_inputSystem.GetKeyDown(SDL_SCANCODE_RIGHT)) rotate = 1;
-	m_transform.rotation += rotate * m_turnRate * kda::g_time.getDeltaTime();
+	transform.rotation += rotate * m_turnRate * kda::g_time.getDeltaTime();
 
 	float thrust = 0;
 	if (kda::g_inputSystem.GetKeyDown(SDL_SCANCODE_UP))thrust = 1;
@@ -49,61 +49,61 @@ void Player::Update(float dt) {
 		data.speedMax = 50;
 		data.damping = 0.5f;
 		data.color = kda::Color{ 0, 1, 0, 1 };
-		kda::Transform transform{ { m_transform.position } , 0, 2 };
+		kda::Transform transform{ { transform.position } , 0, 2 };
 		auto emitter = std::make_unique<kda::Emitter>(transform, data);
-		emitter->m_lifespan = 0;
+		emitter->lifespan = 0;
 		m_scene->Add(std::move(emitter));
 	}
 		
 
-	kda::vec2 forward = kda::vec2{ 0, -1 }.Rotate(m_transform.rotation);
+	kda::vec2 forward = kda::vec2{ 0, -1 }.Rotate(transform.rotation);
 
 	m_physicsComponent->ApplyForce(forward * m_speed * thrust);
 
 	//m_transform.position += forward * m_speed * thrust * kda::g_time.getDeltaTime();
-	m_transform.position.x = kda::wrap(m_transform.position.x, (float)kda::g_renderer.GetWidth());
-	m_transform.position.y = kda::wrap(m_transform.position.y, (float)kda::g_renderer.GetHeight());
+	transform.position.x = kda::wrap(transform.position.x, (float)kda::g_renderer.GetWidth());
+	transform.position.y = kda::wrap(transform.position.y, (float)kda::g_renderer.GetHeight());
 
 	//fire weapon
 	int weaponSelect = 1;
 		
-	if (kda::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) && !kda::g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_SPACE)) {
+	//if (kda::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) && !kda::g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_SPACE)) {
 
-		if (weaponSelect == 1) {
-			kda::Transform transform1{m_transform.position, m_transform.rotation, 1};
-			std::unique_ptr<Pew> pew = std::make_unique<Pew>(400.0f, transform1);
-			pew->m_tag = "Player";
+	//	if (weaponSelect == 1) {
+	//		kda::Transform transform1{transform.position, transform.rotation, 1};
+	//		std::unique_ptr<Pew> pew = std::make_unique<Pew>(400.0f, transform1);
+	//		pew->tag = "Player";
 
-			std::unique_ptr<kda::SpriteComponent> component = std::make_unique<kda::SpriteComponent>();
-			component->m_texture = GET_RESOURCE(kda::Texture, "PlayerBullet.png", kda::g_renderer);
-			pew->AddComponent(std::move(component));
+	//		std::unique_ptr<kda::SpriteComponent> component = std::make_unique<kda::SpriteComponent>();
+	//		component->m_texture = GET_RESOURCE(kda::Texture, "PlayerBullet.png", kda::g_renderer);
+	//		pew->AddComponent(std::move(component));
 
-			auto collisionComponent = std::make_unique<kda::CircleCollisionComponent>();
-			collisionComponent->m_radius = 30.0f;
-			pew->AddComponent(std::move(collisionComponent));
+	//		auto collisionComponent = std::make_unique<kda::CircleCollisionComponent>();
+	//		collisionComponent->m_radius = 30.0f;
+	//		pew->AddComponent(std::move(collisionComponent));
 
-			pew->Initialize();
-			m_scene->Add(std::move(pew));
-		}
-	}
+	//		pew->Initialize();
+	//		m_scene->Add(std::move(pew));
+	//	}
+	//}
 
-	//Big Weapon
-	if (kda::g_inputSystem.GetKeyDown(SDL_SCANCODE_V) && !kda::g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_V)) {
-		kda::Transform transform1{m_transform.position, m_transform.rotation, 10};
-		std::unique_ptr<Pew> pew = std::make_unique<Pew>(400.0f, transform1);
-		pew->m_tag = "Player";
+	////Big Weapon
+	//if (kda::g_inputSystem.GetKeyDown(SDL_SCANCODE_V) && !kda::g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_V)) {
+	//	kda::Transform transform1{transform.position, transform.rotation, 10};
+	//	std::unique_ptr<Pew> pew = std::make_unique<Pew>(400.0f, transform1);
+	//	pew->tag = "Player";
 
-		std::unique_ptr<kda::ModelRenderComponent> component = std::make_unique<kda::ModelRenderComponent>();
-		component->m_model = GET_RESOURCE(kda::Model, "PlayerShip.txt");
-		pew->AddComponent(std::move(component));
+	//	std::unique_ptr<kda::ModelRenderComponent> component = std::make_unique<kda::ModelRenderComponent>();
+	//	component->m_model = GET_RESOURCE(kda::Model, "PlayerShip.txt");
+	//	pew->AddComponent(std::move(component));
 
-		auto collisionComponent = std::make_unique<kda::CircleCollisionComponent>();
-		collisionComponent->m_radius = 30.0f;
-		pew->AddComponent(std::move(collisionComponent));
+	//	auto collisionComponent = std::make_unique<kda::CircleCollisionComponent>();
+	//	collisionComponent->m_radius = 30.0f;
+	//	pew->AddComponent(std::move(collisionComponent));
 
-		pew->Initialize();
-		m_scene->Add(std::move(pew));
-	}
+	//	pew->Initialize();
+	//	m_scene->Add(std::move(pew));
+	//}
 
 	if (kda::g_inputSystem.GetKeyDown(SDL_SCANCODE_T)) kda::g_time.setTimeScale(0.5f);
 	else kda::g_time.setTimeScale(1.0f);
@@ -112,11 +112,11 @@ void Player::Update(float dt) {
 }
 
 void Player::onCollision(Actor* actor){
-	if (actor->m_tag != "Player") {
+	if (actor->tag != "Player") {
 		hp -= 5;
 	}
 	if (hp <= 0) {
-		m_destroyed = true;
+		destroyed = true;
 		m_game->SetLives(m_game->GetLives() - 1);
 		dynamic_cast<SpaceGame*>(m_game)->SetState(SpaceGame::eState::PlayerDeadStart);
 	}

@@ -8,11 +8,13 @@ namespace kda {
 		public:
 			CLASS_DECLARATION(ModelRenderComponent)
 
+			bool Initialize() override;
 			void Update(float dt) override;
 			void Draw(class Renderer& renderer) override;
 
 			virtual float GetRadius() override { return m_model->getRadius(); }
 		public:
+			std::string modelName;
 			res_t<Model> m_model;
 	};
 }
