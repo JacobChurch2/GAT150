@@ -55,33 +55,6 @@ int main(int argc, char* argv[])
 	kda::seedRandom((unsigned int)time(nullptr));
 	kda::setFilePath("Assets");
 
-	rapidjson::Document document;
-	kda::Json::Load("Json.txt", document);
-
-	int i1;
-	kda::Json::Read(document, "integer1", i1);
-	std::cout << i1 << std::endl;
-
-	int i2;
-	kda::Json::Read(document, "integer2", i2);
-	std::cout << i2 << std::endl;
-
-	std::string str;
-	kda::Json::Read(document, "string", str);
-	std::cout << str << std::endl;
-
-	bool b;
-	kda::Json::Read(document, "boolean", b);
-	std::cout << b << std::endl;
-
-	float f;
-	kda::Json::Read(document, "float", f);
-	std::cout << f << std::endl;
-
-	kda::vec2 v2;
-	kda::Json::Read(document, "vector2", v2);
-	std::cout << v2 << std::endl;
-
 	//Initialize game engine
 	kda::g_audioSystem.Initialize();
 	kda::g_renderer.Initialize();
@@ -126,16 +99,11 @@ int main(int argc, char* argv[])
 		//Update Game
 		game->Update(kda::g_time.getDeltaTime());
 
-		if (kda::g_inputSystem.GetMouseButtonDown(0)) {
-			cout << "Mouse Pressed value: left" << endl;
-		}else if (kda::g_inputSystem.GetMouseButtonDown(1)) {
-			cout << "Mouse Pressed value: middle" << endl;
-		}else if (kda::g_inputSystem.GetMouseButtonDown(2)) {
-			cout << "Mouse Pressed value: right" << endl;
-		}
-
+		//Draw Game
 		kda::g_renderer.SetColor(0, 0, 0, 255);
 		kda::g_renderer.BeginFrame();
+
+		game->Draw(kda::g_renderer);
 
 		for (auto& star : stars) {
 
@@ -146,10 +114,7 @@ int main(int argc, char* argv[])
 
 
 		}
-
 		kda::g_particleSystem.Draw(kda::g_renderer);
-		game->Draw(kda::g_renderer);
-		//model.Draw(kda::g_renderer, transform.position, transform.scale, transform.rotation);
 		
 		kda::g_renderer.EndFrame();
 	}

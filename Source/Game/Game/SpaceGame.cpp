@@ -17,8 +17,8 @@ bool SpaceGame::Initialize(){
 	m_scoreText = std::make_unique<kda::Text>(GET_RESOURCE(kda::Font, "ggtype.ttf", 24));
 	m_scoreText->Create(kda::g_renderer, "0000", kda::Color{ 1, 1, 1, 1 });
 
-	m_titleText = std::make_unique<kda::Text>(GET_RESOURCE(kda::Font, "ggtype.ttf", 24));
-	m_titleText->Create(kda::g_renderer, "AZTEROIDS", kda::Color{ 1, 1, 1, 1 });
+	//m_titleText = std::make_unique<kda::Text>(GET_RESOURCE(kda::Font, "ggtype.ttf", 24));
+	//m_titleText->Create(kda::g_renderer, "AZTEROIDS", kda::Color{ 1, 1, 1, 1 });
 
 	m_gameOverText = std::make_unique<kda::Text>(GET_RESOURCE(kda::Font, "ggtype.ttf", 24));
 	m_gameOverText->Create(kda::g_renderer, "GAME OVER", kda::Color{ 1, 1, 1, 1 });
@@ -46,6 +46,7 @@ void SpaceGame::Update(float dt){
 	case SpaceGame::eState::Title:
 		if (kda::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE)) {
 			m_state = eState::StartGame;
+			//m_scene->GetActorByName("Background")->active = false;
 		}
 		break;
 	case SpaceGame::eState::StartGame:
@@ -57,7 +58,7 @@ void SpaceGame::Update(float dt){
 	case SpaceGame::eState::StartLevel:
 		m_scene->RemoveAll();
 	{
-		std::unique_ptr<Player> player = std::make_unique<Player>(20.0f, kda::pi, kda::Transform{ {400, 300}, 0, 1 });
+ 		std::unique_ptr<Player> player = std::make_unique<Player>(20.0f, kda::pi, kda::Transform{ {400, 300}, 0, 1 });
 		player->tag = "Player";
 		player->m_game = this;
 
@@ -128,7 +129,12 @@ void SpaceGame::Draw(kda::Renderer& renderer){
 	m_scene->Draw(renderer);
 
 	if (m_state == eState::Title) {
-		m_titleText->Draw(renderer, 400, 300);
+		//m_titleText->Draw(renderer, 400, 300);
+		m_scene->GetActorByName("Title")->active = true;
+	}
+	else 
+	{
+		m_scene->GetActorByName("Title")->active = false;
 	}
 
 	if (m_state == eState::GameOver) {

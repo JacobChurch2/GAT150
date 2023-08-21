@@ -1,6 +1,9 @@
-Info: Factory.h(53) Class registered: SpriteComponent
-Info: Factory.h(53) Class registered: ModelRenderComponent
-Info: Factory.h(53) Class registered: EnginePhysicsComponent
-Info: Factory.h(53) Class registered: CircleCollisionComponent
-Info: Factory.h(53) Class registered: Actor
+Info: Factory.h(71) Class registered: Pew
+Info: Factory.h(71) Class registered: TextRenderComponent
+Info: Factory.h(71) Class registered: SpriteComponent
+Info: Factory.h(71) Class registered: ModelRenderComponent
+Info: Factory.h(71) Class registered: EnginePhysicsComponent
+Info: Factory.h(71) Class registered: CircleCollisionComponent
+Info: Factory.h(71) Class registered: Actor
 Info: Main.cpp(52) Hello World!
+Info: Factory.h(78) Class registered: Rocket

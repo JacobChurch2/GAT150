@@ -4,6 +4,13 @@
 namespace kda {
 	class Pew : public Actor {
 	public:
+		CLASS_DECLARATION(Pew)
+
+		bool Initialize() override;
+		void Update(float dt) override;
+		void onCollision(Actor* actor);
+		//void Read(const json_t& value);
+
 		/*
 		Pew(float speed, const kda::Transform& transform) :
 			Actor{ transform },
@@ -13,10 +20,6 @@ namespace kda {
 		}
 		*/
 
-		bool Initialize() override;
-		void Update(float dt) override;
-		void onCollision(Actor* actor);
-		void Read(const json_t& value);
 
 	private:
 		float speed = 0;

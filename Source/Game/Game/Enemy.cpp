@@ -70,7 +70,7 @@ void Enemy::onCollision(Actor* actor){
 
 		kda::EmitterData data;
 		data.burst = false;
-		data.burstCount = 10;
+		data.burstCount = 50;
 		data.spawnRate = 500;
 		data.angle = 0;
 		data.angleRange = kda::pi;
@@ -80,7 +80,8 @@ void Enemy::onCollision(Actor* actor){
 		data.speedMax = 50;
 		data.damping = 0.5f;
 		data.color = kda::Color{ 0, 1, 0, 1 };
-		kda::Transform transform{ { transform.position }, 0, 2 };
+
+		kda::Transform transform{ { this->transform.position }, 0, 2 };
 		auto emitter = std::make_unique<kda::Emitter>(transform, data);
 		emitter->lifespan = 0;
 		m_scene->Add(std::move(emitter));

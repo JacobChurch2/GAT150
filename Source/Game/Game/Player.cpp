@@ -49,7 +49,7 @@ void Player::Update(float dt) {
 		data.speedMax = 50;
 		data.damping = 0.5f;
 		data.color = kda::Color{ 0, 1, 0, 1 };
-		kda::Transform transform{ { transform.position } , 0, 2 };
+		kda::Transform transform{ { this->transform.position } , 0, 2 };
 		auto emitter = std::make_unique<kda::Emitter>(transform, data);
 		emitter->lifespan = 0;
 		m_scene->Add(std::move(emitter));
@@ -65,10 +65,17 @@ void Player::Update(float dt) {
 	transform.position.y = kda::wrap(transform.position.y, (float)kda::g_renderer.GetHeight());
 
 	//fire weapon
-	int weaponSelect = 1;
 		
-	//if (kda::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) && !kda::g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_SPACE)) {
+	if (kda::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) && !kda::g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_SPACE)) {
+		auto weapon = INSTANTIATE(Pew, "Rocket");
+		weapon->transform = { transform.position, transform.rotation + kda::DegreesToRadians(10.0f), 1 };
+		weapon->Initialize();
+		m_scene->Add(std::move(weapon));
+	}
 
+	//TODO::Get my second weapon
+	// 
+	// 
 	//	if (weaponSelect == 1) {
 	//		kda::Transform transform1{transform.position, transform.rotation, 1};
 	//		std::unique_ptr<Pew> pew = std::make_unique<Pew>(400.0f, transform1);

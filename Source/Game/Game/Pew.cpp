@@ -3,7 +3,11 @@
 #include "Framework/Framework.h"
 
 namespace kda {
-	bool Pew::Initialize() {
+	CLASS_DEFINITION(Pew)
+
+	bool Pew::Initialize() 
+	{
+		Actor::Initialize();
 
 		auto collisionComponent = GetComponent<kda::CollisionComponent>();
 		if (collisionComponent)
@@ -19,8 +23,10 @@ namespace kda {
 		return true;
 	}
 
-	void Pew::Update(float dt) 
+	void Pew::Update(float dt)
 	{
+		Actor::Update(dt);
+
 		kda::vec2 forward = kda::vec2{ 0, -1 }.Rotate(transform.rotation);
 		transform.position += forward * speed * kda::g_time.getDeltaTime();
 		transform.position.x = kda::wrap(transform.position.x, (float)kda::g_renderer.GetWidth());
@@ -35,6 +41,7 @@ namespace kda {
 	}
 	void Pew::Read(const json_t& value)
 	{
+		Actor::Read(value);
 		READ_DATA(value, speed);
 	}
 }

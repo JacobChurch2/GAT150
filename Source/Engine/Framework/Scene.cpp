@@ -13,9 +13,11 @@ namespace kda {
 	void Scene::Update(float dt) {
 		//update and remove destroyed actors
 		auto iter = m_actors.begin();
-		while (iter != m_actors.end()) {
-			(*iter)->Update(dt);
-			((*iter)->destroyed) ? iter = m_actors.erase(iter) : iter++;
+
+		while (iter != m_actors.end()) 
+		{
+			if ((*iter)->active) (*iter)->Update(dt);
+				((*iter)->destroyed) ? iter = m_actors.erase(iter) : iter++;
 		}
 
 		//check collisions
@@ -36,8 +38,9 @@ namespace kda {
 	}
 
 	void kda::Scene::Draw(Renderer& renderer) {
-		for (auto& actor : m_actors) {
-			actor->Draw(renderer);
+		for (auto& actor : m_actors) 
+		{
+			if(actor->active) actor->Draw(renderer);
 		}
 	}
 
@@ -46,8 +49,12 @@ namespace kda {
 		m_actors.push_back(std::move(actor));
 	}
 
-	void kda::Scene::RemoveAll() {
-		m_actors.clear();
+	void kda::Scene::RemoveAll(bool force) {
+
+		auto iter = m_actors.begin();
+		while (iter != m_actors.end()) {
+			(force || !(*iter)->persistent) ? iter = m_actors.erase(iter) : iter++;
+		}
 	}
 
 	bool kda::Scene::Load(const std::string& filename)
@@ -76,7 +83,15 @@ namespace kda {
 				auto actor = CREATE_CLASS_BASE(Actor, type);
 				actor->Read(actorValue);
 
-				Add(std::move(actor));
+				if (actor->prototype)
+				{
+					std::string name = actor->name;
+					Factory::Instance().RegisterPrototype(name, std::move(actor));
+				}
+				else
+				{
+					Add(std::move(actor));
+				}
 			}
 		}
 	}
