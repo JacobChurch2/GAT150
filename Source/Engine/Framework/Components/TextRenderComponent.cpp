@@ -18,8 +18,8 @@ namespace kda
 	{
 		if (!fontName.empty()) {
 			m_text = std::make_unique<kda::Text>(GET_RESOURCE(Font, fontName, fontSize));
-			return true;
 		}
+		return true;
 	}
 	void TextRenderComponent::Update(float dt)
 	{

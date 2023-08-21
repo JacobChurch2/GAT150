@@ -7,6 +7,7 @@
 #include "Framework/Framework.h"
 #include "Audio/AudioSystem.h"
 #include "Input/InputSystem.h"
+#include "Physics/PhysicsSystem.h"
 
 #include <iostream>
 #include <chrono>
@@ -60,6 +61,7 @@ int main(int argc, char* argv[])
 	kda::g_renderer.Initialize();
 	kda::g_renderer.CreateWindow("CSC196", 800, 600);
 	kda::g_inputSystem.Initialize();
+	kda::PhysicsSystem::Instance().Initialize();
 
 	unique_ptr<SpaceGame> game = make_unique<SpaceGame>();
 	game->Initialize();

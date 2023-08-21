@@ -44,8 +44,10 @@ namespace kda {
 	template<typename T>
 	inline T* Scene::GetActorByName(const std::string& name)
 	{
-		for (auto& actor : m_actors) {
-			if (actor->name == name) {
+		for (auto& actor : m_actors) 
+		{
+			if (actor->name == name) 
+			{
 				T* result = dynamic_cast<T*>(actor.get());
 				if (result) {
 					return result;
