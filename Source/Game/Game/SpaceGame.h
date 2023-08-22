@@ -1,10 +1,13 @@
 #pragma once
 #include "Framework/Game.h"
+#include "Framework/Event/EventManager.h"
 #include "Render/Text.h"
 
-class SpaceGame : public kda::Game {
+class SpaceGame : public kda::Game, kda::IEventListener 
+{
 	public:
-		enum class eState {
+		enum class eState 
+		{
 			Title,
 			StartGame,
 			StartLevel,
@@ -22,6 +25,8 @@ class SpaceGame : public kda::Game {
 		virtual void Draw(kda::Renderer& renderer) override;
 
 		void SetState(eState state) { m_state = state; }
+		void AddPoints(const kda::Event& event);
+		void OnPlayerDead(const kda::Event& event);
 
 	private:
 		eState m_state = eState::Title;

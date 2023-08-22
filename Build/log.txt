@@ -5,5 +5,7 @@ Info: Factory.h(71) Class registered: ModelRenderComponent
 Info: Factory.h(71) Class registered: EnginePhysicsComponent
 Info: Factory.h(71) Class registered: CircleCollisionComponent
 Info: Factory.h(71) Class registered: Actor
-Info: Main.cpp(53) Hello World!
+Info: Main.cpp(56) Hello World!
 Info: Factory.h(78) Class registered: Rocket
+Info: EventManager.cpp(16) Event subscribed: AddPoints
+Info: EventManager.cpp(16) Event subscribed: OnPlayerDead

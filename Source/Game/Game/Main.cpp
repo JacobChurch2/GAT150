@@ -15,6 +15,8 @@
 #include <vector>
 #include <memory>
 #include <array>
+#include <map>
+#include <functional>
 
 using namespace std;
 
@@ -36,19 +38,20 @@ public:
 	kda::Vector2 m_vel;
 };
 
-template <typename T>
-void print(const std::string& s, const T& container)
+union Data
 {
-	std::cout << s << std::endl;
-		for (auto element : container)
-		{
-			std::cout << element << " ";
-		}
-	std::cout << std::endl;
-}
+	int i;
+	bool b;
+	char c[6];
+};
 
 int main(int argc, char* argv[]) 
 {
+	Data data;
+	data.b = true;
+	data.i = 0;
+	cout << data.i << endl;
+	cout << data.b << endl;
 
 	INFO_LOG("Hello World!")
 

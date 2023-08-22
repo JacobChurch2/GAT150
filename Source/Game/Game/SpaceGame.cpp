@@ -17,9 +17,6 @@ bool SpaceGame::Initialize(){
 	m_scoreText = std::make_unique<kda::Text>(GET_RESOURCE(kda::Font, "ggtype.ttf", 24));
 	m_scoreText->Create(kda::g_renderer, "0000", kda::Color{ 1, 1, 1, 1 });
 
-	//m_titleText = std::make_unique<kda::Text>(GET_RESOURCE(kda::Font, "ggtype.ttf", 24));
-	//m_titleText->Create(kda::g_renderer, "AZTEROIDS", kda::Color{ 1, 1, 1, 1 });
-
 	m_gameOverText = std::make_unique<kda::Text>(GET_RESOURCE(kda::Font, "ggtype.ttf", 24));
 	m_gameOverText->Create(kda::g_renderer, "GAME OVER", kda::Color{ 1, 1, 1, 1 });
 
@@ -31,6 +28,10 @@ bool SpaceGame::Initialize(){
 	m_scene = std::make_unique<kda::Scene>();
 	m_scene->Load("Scene.json");
 	m_scene->Initialize();
+
+	//add events
+	EVENT_SUBSCRIBE("AddPoints", SpaceGame::AddPoints);
+	EVENT_SUBSCRIBE("OnPlayerDead", SpaceGame::OnPlayerDead);
 
 	return true;
 }
@@ -144,4 +145,12 @@ void SpaceGame::Draw(kda::Renderer& renderer){
 	m_scoreText->Draw(renderer, 40, 20);
 }
 
-// Path: Source\Game\Game\SpaceGame.cpp
+void SpaceGame::AddPoints(const kda::Event& event)
+{
+	m_score += std::get<int>(event.data);
+}
+
+void SpaceGame::OnPlayerDead(const kda::Event& event)
+{
+	m_state = eState::PlayerDeadStart;
+}

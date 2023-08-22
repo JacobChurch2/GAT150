@@ -1,6 +1,6 @@
 #pragma once
 #include "Framework/Singleton.h"
-#include "..\ThirdParty\box2d\Include\b2_world.h"
+#include "../ThirdParty/box2d/Include/b2_world.h"
 #include <memory>
 namespace kda
 {

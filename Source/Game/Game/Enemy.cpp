@@ -38,8 +38,14 @@ void Enemy::Update(float dt) {
 	transform.position.y = kda::wrap(transform.position.y, (float)kda::g_renderer.GetHeight());
 
 	m_fireRate -= dt;
-	/*if (m_fireRate <= 0) {
-		kda::Transform transform1{transform.position, transform.rotation, 1};
+	if (m_fireRate <= 0) {
+		//TODO::fix weapon
+		/*auto weapon = INSTANTIATE(Pew, "Rocket");
+		weapon->transform = { transform.position, transform.rotation + kda::DegreesToRadians(10.0f), 1 };
+		weapon->Initialize();
+		m_scene->Add(std::move(weapon));*/
+
+		/*kda::Transform transform1{transform.position, transform.rotation, 1};
 		std::unique_ptr<Pew> pew = std::make_unique<Pew>(400.0f, transform1);
 		pew->tag = "Enemy";
 
@@ -54,8 +60,8 @@ void Enemy::Update(float dt) {
 		pew->Initialize();
 		m_scene->Add(std::move(pew));
 
-		m_fireRate = m_fireTime;
-	}*/
+		m_fireRate = m_fireTime;*/
+	}
 	
 }
 
@@ -64,8 +70,10 @@ void Enemy::onCollision(Actor* actor){
 	if (actor->tag == "Player") {
 		hp -= 5;
 	}
-	if (hp <= 0 && !destroyed) {
-		m_game->AddPoint(100);
+	if (hp <= 0 && !destroyed) 
+	{
+		kda::EventManager::Instance().DispatchEvent("AddPoints", 100);
+		//m_game->AddPoint(100);
 		destroyed = true;
 
 		kda::EmitterData data;
