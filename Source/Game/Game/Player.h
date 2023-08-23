@@ -2,23 +2,28 @@
 #include "./Framework/Actor.h"
 #include "Framework/Components/PhysicsComponents.h"
 
-class Player : public kda::Actor {
+namespace kda {
+
+	class Player : public kda::Actor {
 	public:
-		Player(float speed, float turnRate, const kda::Transform& transform) :
-			Actor{ transform },
-			m_speed{ speed },
-			m_turnRate{ turnRate }
-		{}
+		CLASS_DECLARATION(Player)
+
 
 		bool Initialize() override;
 
 		void Update(float dt) override;
 		void onCollision(Actor* actor) override;
 
+		/*Player(float speed, float turnRate, const kda::Transform& transform) :
+			Actor{ transform },
+			m_speed{ speed },
+			m_turnRate{ turnRate }
+		{}*/
 	private:
-		float m_speed = 0;
-		float m_turnRate = 0;
+		float speed = 0;
+		float turnRate = 0;
 		int hp = 100;
 
 		kda::PhysicsComponent* m_physicsComponent = nullptr;
-};
+	};
+}

@@ -27,10 +27,15 @@ namespace kda
 		}
 
 		std::shared_ptr<T> resource = std::make_shared<T>();
-		resource->Create(filename, args...);
-		m_resources[filename] = resource;
+		if (resource->Create(filename, args...))
+		{
+			m_resources[filename] = resource;
+			return resource;
+		}
 
-		return resource;
+		ERROR_LOG("Could not create resource: " << filename);
+
+		return res_t<T>();
 	}
 
 }

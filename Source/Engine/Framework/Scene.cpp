@@ -21,6 +21,7 @@ namespace kda {
 		}
 
 		//check collisions
+		/*
 		for (auto iter1 = m_actors.begin(); iter1 != m_actors.end(); iter1++) {
 			for (auto iter2 = std::next(iter1, 1); iter2 != m_actors.end(); iter2++) {
 
@@ -35,6 +36,7 @@ namespace kda {
 				}
 			}
 		}
+		*/
 	}
 
 	void kda::Scene::Draw(Renderer& renderer) {

@@ -38,21 +38,8 @@ public:
 	kda::Vector2 m_vel;
 };
 
-union Data
-{
-	int i;
-	bool b;
-	char c[6];
-};
-
 int main(int argc, char* argv[]) 
 {
-	Data data;
-	data.b = true;
-	data.i = 0;
-	cout << data.i << endl;
-	cout << data.b << endl;
-
 	INFO_LOG("Hello World!")
 
 	kda::MemoryTracker::Initialize();
@@ -94,10 +81,13 @@ int main(int argc, char* argv[])
 		kda::g_time.tick();
 		kda::g_inputSystem.Update();
 		kda::g_particleSystem.Update(kda::g_time.getDeltaTime());
+		kda::PhysicsSystem::Instance().Update(kda::g_time.getDeltaTime());
 
 		if (kda::g_inputSystem.GetKeyDown(SDL_SCANCODE_ESCAPE)) {
 			quit = true;
-		}if (kda::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE)){
+		}
+
+		if (kda::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE)){
 			kda::g_audioSystem.PlayOneShot("hit");
 		}
 

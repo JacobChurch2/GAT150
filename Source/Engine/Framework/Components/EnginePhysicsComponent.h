@@ -8,5 +8,6 @@ namespace kda {
 
 			void Update(float dt) override;
 			void ApplyForce(const vec2& force) override;
+			virtual void ApplyTorque(float torque) override;
 	};
 }

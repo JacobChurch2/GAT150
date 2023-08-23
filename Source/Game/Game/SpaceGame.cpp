@@ -59,12 +59,13 @@ void SpaceGame::Update(float dt){
 	case SpaceGame::eState::StartLevel:
 		m_scene->RemoveAll();
 	{
- 		std::unique_ptr<Player> player = std::make_unique<Player>(20.0f, kda::pi, kda::Transform{ {400, 300}, 0, 1 });
+		auto player = INSTANTIATE(Player, "Player");
+ 		/*std::unique_ptr<Player> player = std::make_unique<Player>(20.0f, kda::pi, kda::Transform{ {400, 300}, 0, 1 });
 		player->tag = "Player";
-		player->m_game = this;
+		player->m_game = this;*/
 
 		//create components
-		auto component = CREATE_CLASS(SpriteComponent);
+		/*auto component = CREATE_CLASS(SpriteComponent);
 		component->m_texture = GET_RESOURCE(kda::Texture, "PlayerShip.png", kda::g_renderer);
 		player->AddComponent(std::move(component));
 
@@ -74,7 +75,7 @@ void SpaceGame::Update(float dt){
 
 		auto collisionComponent = CREATE_CLASS(CircleCollisionComponent);
 		collisionComponent->m_radius = 30.0f;
-		player->AddComponent(std::move(collisionComponent));
+		player->AddComponent(std::move(collisionComponent));*/
 
 		player->Initialize();
 		m_scene->Add(std::move(player));
@@ -85,7 +86,9 @@ void SpaceGame::Update(float dt){
 		m_spawnTimer += dt;
 		if (m_spawnTimer >= m_spawnTime) {
 			m_spawnTimer = 0;
-			std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(kda::randomf(75.0f, 150.0f), kda::pi, kda::Transform((float)(kda::random(800), kda::random(600)), (float)kda::random((int)(kda::pi2), 1)));
+
+			auto enemy = INSTANTIATE(Enemy, "Enemy");
+			/*std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(kda::randomf(75.0f, 150.0f), kda::pi, kda::Transform((float)(kda::random(800), kda::random(600)), (float)kda::random((int)(kda::pi2), 1)));
 			enemy->tag = "Enemy";
 			enemy->m_game = this;
 
@@ -95,7 +98,7 @@ void SpaceGame::Update(float dt){
 
 			auto collisionComponent = std::make_unique<kda::CircleCollisionComponent>();
 			collisionComponent->m_radius = 30.0f;
-			enemy->AddComponent(std::move(collisionComponent));
+			enemy->AddComponent(std::move(collisionComponent));*/
 
 			enemy->Initialize();
 			m_scene->Add(std::move(enemy));

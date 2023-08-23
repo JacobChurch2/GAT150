@@ -13,8 +13,13 @@ namespace kda {
 		m_velocity += force;
 	}
 
+	void EnginePhysicsComponent::ApplyTorque(float torque)
+	{
+		//
+	}
+
 	void EnginePhysicsComponent::Read(const json_t& value)
 	{
-
+		//
 	}
 }
