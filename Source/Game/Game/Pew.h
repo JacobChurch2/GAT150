@@ -1,5 +1,6 @@
 #pragma once
 #include "Framework/Actor.h"
+#include "Framework/Components/PhysicsComponents.h"
 
 namespace kda {
 	class Pew : public Actor {
@@ -8,21 +9,12 @@ namespace kda {
 
 		bool Initialize() override;
 		void Update(float dt) override;
-		void onCollision(Actor* actor);
-		//void Read(const json_t& value);
-
-		/*
-		Pew(float speed, const kda::Transform& transform) :
-			Actor{ transform },
-			m_speed{ speed }
-		{
-			lifespan = 2.0f;
-		}
-		*/
+		void onCollisionEnter(Actor* actor) override;
 
 
 	private:
 		float speed = 0;
-		float turnRate = 0;
+
+		kda::PhysicsComponent* m_physicsComponent = nullptr;
 	};
 }

@@ -11,7 +11,7 @@ namespace kda {
 
 
 		void Update(float dt) override;
-		void onCollision(Actor* actor) override;
+		void onCollisionEnter(Actor* actor) override;
 
 		/*Enemy(float speed, float turnRate, const kda::Transform& transform) :
 			Actor{ transform },

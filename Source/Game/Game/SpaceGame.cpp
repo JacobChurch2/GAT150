@@ -13,20 +13,20 @@
 
 bool SpaceGame::Initialize(){
 	//Create fonts/ text objects
-	m_font = GET_RESOURCE(kda::Font, "ggtype.ttf", 24);
-	m_scoreText = std::make_unique<kda::Text>(GET_RESOURCE(kda::Font, "ggtype.ttf", 24));
+	m_font = GET_RESOURCE(kda::Font, "Textures/ggtype.ttf", 24);
+	m_scoreText = std::make_unique<kda::Text>(GET_RESOURCE(kda::Font, "Textures/ggtype.ttf", 24));
 	m_scoreText->Create(kda::g_renderer, "0000", kda::Color{ 1, 1, 1, 1 });
 
-	m_gameOverText = std::make_unique<kda::Text>(GET_RESOURCE(kda::Font, "ggtype.ttf", 24));
+	m_gameOverText = std::make_unique<kda::Text>(GET_RESOURCE(kda::Font, "Textures/ggtype.ttf", 24));
 	m_gameOverText->Create(kda::g_renderer, "GAME OVER", kda::Color{ 1, 1, 1, 1 });
 
 	//Load audio
-	kda::g_audioSystem.AddAudio("hit", "Laser_Shoot.wav");
-	kda::g_audioSystem.AddAudio("music", "Music.wav");
+	kda::g_audioSystem.AddAudio("hit", "Audio/Laser_Shoot.wav");
+	kda::g_audioSystem.AddAudio("music", "Audio/Music.wav");
 
 	//Scene
 	m_scene = std::make_unique<kda::Scene>();
-	m_scene->Load("Scene.json");
+	m_scene->Load("Scenes/SpaceScene.json");
 	m_scene->Initialize();
 
 	//add events
@@ -60,6 +60,7 @@ void SpaceGame::Update(float dt){
 		m_scene->RemoveAll();
 	{
 		auto player = INSTANTIATE(Player, "Player");
+		player->transform = kda::Transform{ { 400, 300 }, 0, 1 };
  		/*std::unique_ptr<Player> player = std::make_unique<Player>(20.0f, kda::pi, kda::Transform{ {400, 300}, 0, 1 });
 		player->tag = "Player";
 		player->m_game = this;*/
@@ -88,6 +89,7 @@ void SpaceGame::Update(float dt){
 			m_spawnTimer = 0;
 
 			auto enemy = INSTANTIATE(Enemy, "Enemy");
+			enemy->transform = kda::Transform{ { kda::random(800), kda::random(600) }, kda::randomf(kda::pi2), 1 };
 			/*std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(kda::randomf(75.0f, 150.0f), kda::pi, kda::Transform((float)(kda::random(800), kda::random(600)), (float)kda::random((int)(kda::pi2), 1)));
 			enemy->tag = "Enemy";
 			enemy->m_game = this;
@@ -155,5 +157,6 @@ void SpaceGame::AddPoints(const kda::Event& event)
 
 void SpaceGame::OnPlayerDead(const kda::Event& event)
 {
+	m_lives--;
 	m_state = eState::PlayerDeadStart;
 }

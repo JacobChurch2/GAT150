@@ -9,15 +9,12 @@ namespace kda {
 	{
 		Actor::Initialize();
 
+		m_physicsComponent = GetComponent<PhysicsComponent>();
+
 		auto collisionComponent = GetComponent<kda::CollisionComponent>();
 		if (collisionComponent)
 		{
-			auto renderComponent = GetComponent<kda::RenderComponent>();
-			if (renderComponent)
-			{
-				float scale = transform.scale;
-				collisionComponent->m_radius = renderComponent->GetRadius() * scale;
-			}
+			
 		}
 
 		return true;
@@ -28,12 +25,13 @@ namespace kda {
 		Actor::Update(dt);
 
 		kda::vec2 forward = kda::vec2{ 0, -1 }.Rotate(transform.rotation);
-		transform.position += forward * speed * kda::g_time.getDeltaTime();
+		m_physicsComponent->SetVelocity(forward * speed);
+
 		transform.position.x = kda::wrap(transform.position.x, (float)kda::g_renderer.GetWidth());
 		transform.position.y = kda::wrap(transform.position.y, (float)kda::g_renderer.GetHeight());
 	}
 
-	void Pew::onCollision(Actor* actor) {
+	void Pew::onCollisionEnter(Actor* actor) {
 		if (actor->tag != tag) {
 			lifespan = 0;
 			destroyed = true;

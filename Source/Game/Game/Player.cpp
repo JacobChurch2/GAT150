@@ -72,7 +72,7 @@ namespace kda {
 
 		if (kda::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) && !kda::g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_SPACE)) {
 			auto weapon = INSTANTIATE(Pew, "Rocket");
-			weapon->transform = { transform.position, transform.rotation + kda::DegreesToRadians(10.0f), 1 };
+			weapon->transform = { transform.position + forward * 30, transform.rotation, 1 };
 			weapon->Initialize();
 			m_scene->Add(std::move(weapon));
 		}
@@ -122,15 +122,14 @@ namespace kda {
 		//std::cout << m_transform.position.x << " " << m_transform.position.y << std::endl;
 	}
 
-	void Player::onCollision(Actor* actor) {
+	void Player::onCollisionEnter(Actor* actor) {
 		if (actor->tag != "Player") {
 			hp -= 5;
 		}
 		if (hp <= 0) {
 			destroyed = true;
 			kda::EventManager::Instance().DispatchEvent("OnPlayerDead", 0);
-			m_game->SetLives(m_game->GetLives() - 1);
-
+			//m_game->SetLives(m_game->GetLives() - 1);
 			//dynamic_cast<SpaceGame*>(m_game)->SetState(SpaceGame::eState::PlayerDeadStart);
 		}
 	}

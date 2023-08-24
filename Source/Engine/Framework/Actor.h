@@ -27,8 +27,9 @@ namespace kda {
 		template<typename T>
 		T* GetComponent();
 		
-		float GetRadius() { return 30.0f; }
-		virtual void onCollision(Actor* other) {}
+		//float GetRadius() { return 30.0f; }
+		virtual void onCollisionEnter(Actor* other) {}
+		virtual void onCollisionExit(Actor* other) {}
 			
 		class Scene* m_scene = nullptr;
 		friend class Scene;

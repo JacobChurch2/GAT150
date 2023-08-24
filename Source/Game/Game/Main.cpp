@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
 
 	kda::MemoryTracker::Initialize();
 	kda::seedRandom((unsigned int)time(nullptr));
-	kda::setFilePath("Assets");
+	kda::setFilePath("Assets/SpaceGame");
 
 	//Initialize game engine
 	kda::g_audioSystem.Initialize();

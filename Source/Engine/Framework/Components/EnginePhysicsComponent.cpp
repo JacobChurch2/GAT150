@@ -5,12 +5,12 @@ namespace kda {
 	CLASS_DEFINITION(EnginePhysicsComponent)
 
 	void kda::EnginePhysicsComponent::Update(float dt){
-		m_owner->transform.position += m_velocity * dt;
-		m_velocity *= std::pow(1.0f - m_damping, dt);
+		m_owner->transform.position += velocity * dt;
+		velocity *= std::pow(1.0f - damping, dt);
 	}
 
 	void kda::EnginePhysicsComponent::ApplyForce(const vec2& force){
-		m_velocity += force;
+		velocity += force;
 	}
 
 	void EnginePhysicsComponent::ApplyTorque(float torque)

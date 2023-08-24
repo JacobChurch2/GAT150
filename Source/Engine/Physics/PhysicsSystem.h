@@ -1,8 +1,9 @@
 #pragma once
 #include "Framework/Singleton.h"
 #include "Core/Math/Vector2.h"
+#include "ContactListener.h"
 //#include "../ThirdParty/box2d/Include/b2_world.h"
-#include <../ThirdParty/box2d/Include/box2d.h>
+#include <box2d/Include/box2d.h>
 #include <memory>
 
 #define VEC2_TO_B2VEC2(vec) (*(b2Vec2*)(&vec))
@@ -51,6 +52,8 @@ namespace kda
 
 	private:
 		float m_pixelsPerUnit = 48.0f;
+
 		std::unique_ptr<b2World> m_world;
+		std::unique_ptr<ContactListener> m_contactListener;
 	};
 }

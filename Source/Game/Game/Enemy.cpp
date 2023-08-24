@@ -74,7 +74,7 @@ namespace kda {
 
 	}
 
-	void Enemy::onCollision(Actor* actor) {
+	void Enemy::onCollisionEnter(Actor* actor) {
 		//Player* p = dynamic_cast<Player*>(actor)
 		if (actor->tag == "Player") {
 			hp -= 5;
@@ -87,7 +87,7 @@ namespace kda {
 
 			kda::EmitterData data;
 			data.burst = false;
-			data.burstCount = 50;
+			data.burstCount = 500;
 			data.spawnRate = 500;
 			data.angle = 0;
 			data.angleRange = kda::pi;

@@ -12,7 +12,7 @@ namespace kda {
 		bool Initialize() override;
 
 		void Update(float dt) override;
-		void onCollision(Actor* actor) override;
+		void onCollisionEnter(Actor* actor) override;
 
 		/*Player(float speed, float turnRate, const kda::Transform& transform) :
 			Actor{ transform },
@@ -22,7 +22,7 @@ namespace kda {
 	private:
 		float speed = 0;
 		float turnRate = 0;
-		int hp = 100;
+		int hp = 10;
 
 		kda::PhysicsComponent* m_physicsComponent = nullptr;
 	};
