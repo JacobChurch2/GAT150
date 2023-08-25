@@ -6,13 +6,13 @@
 			"persistent": true,
 			"transform": {
 				"position": [ 400, 300 ],
-				"scale": 2,
+				"scale": 0.7,
 				"rotation": 0
 			},
 			"components": [
 				{
 					"type": "SpriteComponent",
-					"textureName": "Textures/background.png"
+					"textureName": "Textures/game_background_2.png"
 				}
 			]
 		},
@@ -21,16 +21,44 @@
 			"name": "Title",
 			"persistent": true,
 			"transform": {
-				"position": [ 400, 300 ],
+				"position": [ 400, 200 ],
 				"scale": 2,
 				"rotation": 0
 			},
 			"components": [
 				{
 					"type": "TextRenderComponent",
-					"fontName": "Textures/ggtype.ttf",
+					"fontName": "Fonts/ggtype.ttf",
 					"fontSize": 24,
-					"text": "DARKER SOULS"
+					"text": "DARKER SOULS",
+					"color": [ 1, 0, 0, 1 ]
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "Coin",
+			"persistent": true,
+			"transform": {
+				"position": [ 400, 300 ],
+				"scale": 1,
+				"rotation": 0
+			},
+			"components": [
+				{
+					"type": "SpriteAnimComponent",
+					"defaultSequence": "idle",
+					"sequences": [
+						{
+							"name": "idle",
+							"fps": 12,
+							"numColumns": 8,
+							"numRows": 1,
+							"startFrame": 1,
+							"endFrame": 8,
+							"textureName": "Textures/coin.png"
+						}
+					]
 				}
 			]
 		}

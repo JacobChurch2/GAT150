@@ -28,7 +28,7 @@
 			"components": [
 				{
 					"type": "TextRenderComponent",
-					"fontName": "Textures/ggtype.ttf",
+					"fontName": "Fonts/ggtype.ttf",
 					"fontSize": 24,
 					"text": "ASTEROIDZ"
 				}

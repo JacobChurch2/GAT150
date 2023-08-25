@@ -1,5 +1,5 @@
 #pragma once
-#include "Framework/Components/RenderComponent.h"
+#include "RenderComponent.h"
 #include "Render/Texture.h"
 #include "Framework/Factory.h"
 
@@ -12,8 +12,8 @@ namespace kda {
 			void Update(float dt) override;
 			void Draw(class Renderer& renderer) override;
 
-			virtual float GetRadius() { return m_texture->GetSize().length() * 0.5f; }
 		public:
+			Rect source;
 			std::string textureName;
 			res_t<Texture> m_texture;
 	};

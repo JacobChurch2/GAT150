@@ -13,11 +13,11 @@
 
 bool SpaceGame::Initialize(){
 	//Create fonts/ text objects
-	m_font = GET_RESOURCE(kda::Font, "Textures/ggtype.ttf", 24);
-	m_scoreText = std::make_unique<kda::Text>(GET_RESOURCE(kda::Font, "Textures/ggtype.ttf", 24));
+	m_font = GET_RESOURCE(kda::Font, "Fonts/ggtype.ttf", 24);
+	m_scoreText = std::make_unique<kda::Text>(GET_RESOURCE(kda::Font, "Fonts/ggtype.ttf", 24));
 	m_scoreText->Create(kda::g_renderer, "0000", kda::Color{ 1, 1, 1, 1 });
 
-	m_gameOverText = std::make_unique<kda::Text>(GET_RESOURCE(kda::Font, "Textures/ggtype.ttf", 24));
+	m_gameOverText = std::make_unique<kda::Text>(GET_RESOURCE(kda::Font, "Fonts/ggtype.ttf", 24));
 	m_gameOverText->Create(kda::g_renderer, "GAME OVER", kda::Color{ 1, 1, 1, 1 });
 
 	//Load audio

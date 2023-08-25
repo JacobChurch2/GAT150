@@ -135,7 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="..\..\..\Build\Assets\Scenes\PlatformScene.json" />
+    <None Include="..\..\..\Build\Assets\PlatformGame\Scenes\PlatformScene.json" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
