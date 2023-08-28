@@ -36,9 +36,15 @@ void PlatformGame::Update(float dt) {
 	switch (m_state)
 	{
 	case PlatformGame::eState::Title:
-		if (kda::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE)) {
+		/*if (kda::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE)) {
 			m_state = eState::StartGame;
-		}
+		}*/
+	{
+		auto actor = INSTANTIATE(Actor, "Crate");
+		actor->transform.position = { kda::random(kda::g_renderer.GetWidth()), 100 };
+		actor->Initialize();
+		m_scene->Add(std::move(actor));
+	}
 		break;
 	case PlatformGame::eState::StartGame:
 		m_score = 0;

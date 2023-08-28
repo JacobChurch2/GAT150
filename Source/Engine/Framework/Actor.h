@@ -16,6 +16,9 @@ namespace kda {
 			transform{ transform }
 		{}
 		Actor(const Actor& other);
+		virtual ~Actor() {
+			OnDestroy();
+		}
 
 		virtual bool Initialize() override;
 		virtual void OnDestroy() override;
@@ -37,7 +40,7 @@ namespace kda {
 		class Game* m_game = nullptr;
 			
 	public:
-		kda::Transform transform;
+		Transform transform;
 		std::string tag;
 			
 		float lifespan = -1.0f;

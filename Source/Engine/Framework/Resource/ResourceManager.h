@@ -26,16 +26,15 @@ namespace kda
 			return std::dynamic_pointer_cast<T>(m_resources[filename]);
 		}
 
-		std::shared_ptr<T> resource = std::make_shared<T>();
-		if (resource->Create(filename, args...))
+		res_t<T> resource = std::make_shared<T>();
+		if (!resource->Create(filename, args...))
 		{
-			m_resources[filename] = resource;
-			return resource;
+			WARNING_LOG("Could not create resource: " << filename);
+			return res_t<T>();
 		}
 
-		ERROR_LOG("Could not create resource: " << filename);
-
-		return res_t<T>();
+		m_resources[filename] = resource;
+		return resource;
 	}
 
 }
