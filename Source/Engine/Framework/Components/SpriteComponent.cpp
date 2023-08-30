@@ -28,7 +28,8 @@ namespace kda {
 
 	}
 
-	void SpriteComponent::Draw(Renderer& renderer){
+	void SpriteComponent::Draw(Renderer& renderer)
+	{
 		renderer.DrawTexture(m_texture.get(), source, m_owner->transform, origin, flipH);
 	}
 

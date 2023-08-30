@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
 	//Initialize game engine
 	kda::g_audioSystem.Initialize();
 	kda::g_renderer.Initialize();
-	kda::g_renderer.CreateWindow("CSC196", 800, 600);
+	kda::g_renderer.CreateWindow("CSC196", 1600, 800);
 	kda::g_inputSystem.Initialize();
 	kda::PhysicsSystem::Instance().Initialize();
 
