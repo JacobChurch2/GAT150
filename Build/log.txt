@@ -1,5 +1,6 @@
 Info: Factory.h(71) Class registered: Enemy
 Info: Factory.h(71) Class registered: Player
+Info: Factory.h(71) Class registered: TilemapComponent
 Info: Factory.h(71) Class registered: TextRenderComponent
 Info: Factory.h(71) Class registered: SpriteComponent
 Info: Factory.h(71) Class registered: SpriteAnimComponent
@@ -10,6 +11,10 @@ Info: Factory.h(71) Class registered: Box2DPhysicsComponent
 Info: Factory.h(71) Class registered: Box2DCollisionComponent
 Info: Factory.h(71) Class registered: Actor
 Info: Main.cpp(23) Hello World!
+Info: Factory.h(78) Class registered: Coin
 Info: Factory.h(78) Class registered: Crate
+Info: Factory.h(78) Class registered: Enemy
+Info: Factory.h(78) Class registered: tile01
+Info: Factory.h(78) Class registered: tile02
 Info: EventManager.cpp(16) Event subscribed: AddPoints
 Info: EventManager.cpp(16) Event subscribed: OnPlayerDead

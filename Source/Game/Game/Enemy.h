@@ -24,7 +24,7 @@ namespace kda {
 
 	private:
 		float speed = 0;
-		float turnRate = 0;
+		//float turnRate = 0;
 
 		float fireTime = 3.0f;
 		float fireRate = 0;

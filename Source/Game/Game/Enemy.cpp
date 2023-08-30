@@ -109,7 +109,7 @@ namespace kda {
 	{
 		Actor::Read(value);
 		READ_DATA(value, speed);
-		READ_DATA(value, turnRate);
+		//READ_DATA(value, turnRate);
 		//READ_DATA(value, fireTime);
 		//READ_DATA(value, fireRate);
 	}

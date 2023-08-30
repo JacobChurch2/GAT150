@@ -39,6 +39,7 @@
 			"type": "Actor",
 			"name": "Coin",
 			"persistent": true,
+			"prototype": true,
 			"transform": {
 				"position": [ 300, 300 ],
 				"scale": 1,
@@ -62,12 +63,12 @@
 				},
 				{
 					"type": "Box2DPhysicsComponent",
-					"gravityScale": 10,
+					"gravityScale": 1,
 					"constrainAngle": true
 				},
 				{
 					"type": "Box2DCollisionComponent",
-					"resitution": 1
+					"resitution": 0.2
 				}
 			]
 		},
@@ -93,7 +94,7 @@
 				},
 				{
 					"type": "Box2DCollisionComponent",
-					"resitution": 0.1
+					"restitution": 0.1
 				}
 			]
 		},
@@ -102,8 +103,9 @@
 			"name": "Player",
 			"tag": "Player",
 			"persistent": true,
-			"speed": 10,
-			"jump": 8,
+			"speed": 65,
+			"maxSpeed": 8,
+			"jump": 11.5,
 			"transform": {
 				"position": [ 400, 300 ],
 				"scale": 1,
@@ -113,6 +115,8 @@
 				{
 					"type": "SpriteAnimComponent",
 					"defaultSequenceName": "idle",
+					"source": [0,0,16,35],
+					"origin": [ 0.5, 0.6 ],
 					"sequences": [
 						{
 							"name": "idle",
@@ -136,12 +140,12 @@
 				},
 				{
 					"type": "Box2DPhysicsComponent",
-					"gravityScale": 0.5,
+					"gravityScale": 2,
 					"constrainAngle": true
 				},
 				{
 					"type": "Box2DCollisionComponent",
-					"resitution": 0.1
+					"restitution": 0
 				}
 			]
 		},
@@ -150,8 +154,9 @@
 			"name": "Enemy",
 			"tag": "Enemy",
 			"persistent": true,
-			"speed": 10,
-			"jump": 8,
+			"prototype": true,
+			"speed": 0.25,
+			"turnRate": 0.25,
 			"transform": {
 				"position": [ 440, 300 ],
 				"scale": 1,
@@ -180,27 +185,8 @@
 				},
 				{
 					"type": "Box2DCollisionComponent",
-					"resitution": 0.1
-				}
-			]
-		},
-		{
-			"type": "Actor",
-			"tag": "Ground",
-			"transform": {
-				"position": [
-					400,
-					520
-				]
-			},
-			"components": [
-				{
-					"type": "Box2DPhysicsComponent",
-					"isDynamic": false
-				},
-				{
-					"type": "Box2DCollisionComponent",
-					"size": [ 600, 20 ]
+					"restitution": 0.1,
+					"isTrigger": true
 				}
 			]
 		}

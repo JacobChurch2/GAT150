@@ -9,8 +9,10 @@ namespace kda
 	bool SpriteAnimComponent::Initialize()
 	{
 		SpriteComponent::Initialize();
-		SetSequence(defaultSequenceName);
-		UpdateSource();
+		SetSequence(defaultSequenceName, false);
+		if (source.w == 0 && source.h == 0) {
+			UpdateSource();
+		}
 
 		return true;
 	}
@@ -30,7 +32,7 @@ namespace kda
 		UpdateSource();
 	}
 
-	void SpriteAnimComponent::SetSequence(const std::string& name)
+	void SpriteAnimComponent::SetSequence(const std::string& name, bool update)
 	{
 		// prevent set sequence again
 		if (m_sequence && m_sequence->name == name) return;
@@ -45,6 +47,8 @@ namespace kda
 			//reset frame sequence
 			frame = m_sequence->startFrame;
 			frameTimer = 1.0f / m_sequence->fps;
+
+			if (update) UpdateSource();
 		}
 	}
 

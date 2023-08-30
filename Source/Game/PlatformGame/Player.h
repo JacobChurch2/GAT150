@@ -1,5 +1,6 @@
 #pragma once
-#include "./Framework/Actor.h"
+#include "Framework/Actor.h"
+#include "Framework/Components/SpriteAnimComponent.h"
 #include "Framework/Components/PhysicsComponents.h"
 
 namespace kda {
@@ -17,10 +18,12 @@ namespace kda {
 
 	private:
 		float speed = 0;
+		float maxSpeed = 0;
 		float jump = 0;
 		int hp = 100;
 		int groundCount = 0;
 
 		kda::PhysicsComponent* m_physicsComponent = nullptr;
+		kda::SpriteAnimComponent* m_spriteAnimComponent = nullptr;
 	};
 }

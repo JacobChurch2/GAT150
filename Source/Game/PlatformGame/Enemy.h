@@ -17,6 +17,7 @@ namespace kda {
 
 	private:
 		float speed = 0;
+		float turnRate = 0;
 		int hp = 100;
 
 		kda::PhysicsComponent* m_physicsComponent = nullptr;

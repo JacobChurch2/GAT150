@@ -18,6 +18,7 @@ bool PlatformGame::Initialize() {
 	//Scene
 	m_scene = std::make_unique<kda::Scene>();
 	m_scene->Load("Scenes/PlatformScene.json");
+	m_scene->Load("Scenes/tilemap.json");
 	m_scene->Initialize();
 
 	//add events
@@ -40,10 +41,10 @@ void PlatformGame::Update(float dt) {
 			m_state = eState::StartGame;
 		}*/
 	{
-		auto actor = INSTANTIATE(Actor, "Crate");
+		/*auto actor = INSTANTIATE(Actor, "Crate");
 		actor->transform.position = { kda::random(kda::g_renderer.GetWidth()), 100 };
 		actor->Initialize();
-		m_scene->Add(std::move(actor));
+		m_scene->Add(std::move(actor));*/
 	}
 		break;
 	case PlatformGame::eState::StartGame:

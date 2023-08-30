@@ -2,6 +2,7 @@
 #include "Framework/Framework.h"
 #include "Render/Renderer.h"
 #include "Input/InputSystem.h"
+#include "Player.h"
 
 
 namespace kda {
@@ -20,13 +21,16 @@ namespace kda {
 		Actor::Update(dt);
 
 		//movement
-		float dir = 0;
+		kda::vec2 forward = kda::vec2{ 0, -1 }.Rotate(transform.rotation);
+		Player* player = m_scene->GetActor<Player>();
 
-		kda::vec2 forward = kda::vec2{ 1,0 };
-		m_physicsComponent->ApplyForce(forward * speed * dir);
+		if (player) {
+			kda::vec2 direction = player->transform.position - transform.position;
+			m_physicsComponent->ApplyForce(direction.Normalized() * speed);
+		}
 
-		if (kda::g_inputSystem.GetKeyDown(SDL_SCANCODE_T)) kda::g_time.setTimeScale(0.5f);
-		else kda::g_time.setTimeScale(1.0f);
+		transform.position.x = kda::wrap(transform.position.x, (float)kda::g_renderer.GetWidth());
+		transform.position.y = kda::wrap(transform.position.y, (float)kda::g_renderer.GetHeight());
 	}
 
 	void Enemy::onCollisionEnter(Actor* actor) {
@@ -48,6 +52,7 @@ namespace kda {
 	{
 		Actor::Read(value);
 		READ_DATA(value, speed);
+		READ_DATA(value, turnRate);
 		READ_DATA(value, hp);
 
 	}
