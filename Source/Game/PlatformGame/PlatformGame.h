@@ -15,7 +15,8 @@ public:
 		PlayerDead,
 		PlayerDeadStart,
 		GameOver,
-		GameOverStart
+		GameOverStart,
+		YouWin
 	};
 
 public:
@@ -27,6 +28,7 @@ public:
 	void SetState(eState state) { m_state = state; }
 	void AddPoints(const kda::Event& event);
 	void OnPlayerDead(const kda::Event& event);
+	void OnEndLevel(const kda::Event& event);
 
 private:
 	eState m_state = eState::Title;
@@ -35,4 +37,7 @@ private:
 
 	float m_stateTimer = 3;
 	float m_gameTimer = 0;
+
+	std::shared_ptr<kda::Font> m_font;
+	std::shared_ptr<kda::Text> m_TimerText;
 };

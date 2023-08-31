@@ -18,6 +18,7 @@
 #include "Components/Box2DPhysicsComponent.h"
 #include "Components/SpriteAnimComponent.h"
 #include "Components/TilemapComponent.h"
+#include "Components/TextRenderComponent.h"
 
 #include "Resource/Resource.h"
 #include "Resource/ResourceManager.h"

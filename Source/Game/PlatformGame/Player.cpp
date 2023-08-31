@@ -49,10 +49,14 @@ namespace kda {
 		else kda::g_time.setTimeScale(1.0f);
 
 		//animation
-		if (std::fabs(velocity.x) > 0.2f)
+		if (std::fabs(velocity.x) > 0.2f && onGround)
 		{
 			if (dir != 0) m_spriteAnimComponent->flipH = (dir < 0);
 			m_spriteAnimComponent->SetSequence("run");
+		}
+		else if (std::fabs(velocity.y) > 0.2f) {
+			if (dir != 0) m_spriteAnimComponent->flipH = (dir < 0);
+			m_spriteAnimComponent->SetSequence("jump");
 		}
 		else 
 		{
@@ -67,6 +71,9 @@ namespace kda {
 		if (hp <= 0) {
 			destroyed = true;
 			kda::EventManager::Instance().DispatchEvent("OnPlayerDead", 0);
+		}
+		if (actor->tag == "Grape") {
+			kda::EventManager::Instance().DispatchEvent("OnEndLevel", 0);
 		}
 		if (actor->tag == "Ground") {
 			groundCount++;

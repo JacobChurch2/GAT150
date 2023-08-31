@@ -42,7 +42,9 @@ namespace kda {
 	void kda::Scene::Draw(Renderer& renderer) {
 		for (auto& actor : m_actors) 
 		{
-			if(actor->active) actor->Draw(renderer);
+			if (actor->active) {
+				actor->Draw(renderer);
+			}
 		}
 	}
 
@@ -56,6 +58,22 @@ namespace kda {
 		auto iter = m_actors.begin();
 		while (iter != m_actors.end()) {
 			(force || !(*iter)->persistent) ? iter = m_actors.erase(iter) : iter++;
+		}
+	}
+
+	void kda::Scene::ActivateAll(bool active) {
+
+		for (auto& actor : m_actors)
+		{
+			actor->active = active;
+		}
+	}
+
+	void Scene::ActivateAllWithTag(const std::string& tag, bool active)
+	{
+		for (auto& actor : m_actors)
+		{
+			if (actor->tag == tag || tag.empty()) actor->active = active;
 		}
 	}
 

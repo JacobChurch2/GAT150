@@ -15,6 +15,8 @@ namespace kda {
 
 		void Add(std::unique_ptr<Actor> actor);
 		void RemoveAll(bool force = false);
+		void ActivateAll(bool active = true);
+		void ActivateAllWithTag(const std::string& tag, bool active = true);
 
 		bool Load(const std::string& filename);
 		void Read(const json_t& value);
@@ -26,6 +28,7 @@ namespace kda {
 		T* GetActorByName(const std::string& name);
 
 		friend class Actor;
+
 	private:
 		std::list<std::unique_ptr<Actor>> m_actors;
 	};

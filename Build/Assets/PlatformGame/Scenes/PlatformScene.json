@@ -21,7 +21,7 @@
 			"name": "Title",
 			"persistent": true,
 			"transform": {
-				"position": [ 400, 200 ],
+				"position": [ 800, 350 ],
 				"scale": 2,
 				"rotation": 0
 			},
@@ -30,8 +30,46 @@
 					"type": "TextRenderComponent",
 					"fontName": "Fonts/ggtype.ttf",
 					"fontSize": 24,
-					"text": "DARKER SOULS",
+					"text": "Speedrun",
 					"color": [ 1, 0, 0, 1 ]
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "Timer",
+			"persistent": true,
+			"transform": {
+				"position": [ 800, 300 ],
+				"scale": 1,
+				"rotation": 0
+			},
+			"components": [
+				{
+					"type": "TextRenderComponent",
+					"fontName": "Fonts/ggtype.ttf",
+					"fontSize": 24,
+					"text": "",
+					"color": [ 1, 1, 1, 1 ]
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "YouWin",
+			"persistent": true,
+			"transform": {
+				"position": [ 800, 300 ],
+				"scale": 2,
+				"rotation": 0
+			},
+			"components": [
+				{
+					"type": "TextRenderComponent",
+					"fontName": "Fonts/ggtype.ttf",
+					"fontSize": 24,
+					"text": "You Win",
+					"color": [ 0, 1, 0, 1 ]
 				}
 			]
 		},
@@ -69,6 +107,32 @@
 				{
 					"type": "Box2DCollisionComponent",
 					"resitution": 0.2
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "Grape",
+			"tag": "Grape",
+			"persistent": true,
+			"prototype": true,
+			"transform": {
+				"position": [ 1536, 736 ],
+				"scale": 0.5,
+				"rotation": 0
+			},
+			"components": [
+				{
+					"type": "SpriteComponent",
+					"textureName": "Textures/Grape.png"
+				},
+				{
+					"type": "Box2DPhysicsComponent",
+					"gravityScale": 0
+				},
+				{
+					"type": "Box2DCollisionComponent",
+					"restitution": 0
 				}
 			]
 		},
@@ -132,6 +196,15 @@
 							"numRows": 9,
 							"startFrame": 25,
 							"endFrame": 32,
+							"textureName": "Textures/PlayerSprites.png"
+						},
+						{
+							"name": "jump",
+							"fps": 8,
+							"numColumns": 8,
+							"numRows": 9,
+							"startFrame": 41,
+							"endFrame": 48,
 							"textureName": "Textures/PlayerSprites.png"
 						}
 					]
