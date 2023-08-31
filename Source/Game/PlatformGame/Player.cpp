@@ -3,6 +3,7 @@
 #include "Framework/Framework.h"
 #include "Render/Renderer.h"
 #include "Input/InputSystem.h"
+#include "Audio/AudioSystem.h"
 
 
 namespace kda {
@@ -37,7 +38,9 @@ namespace kda {
 		}
 
 		//jump
-		if (onGround && kda::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) && !kda::g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_SPACE)) 
+		if (onGround && ((kda::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) && !kda::g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_SPACE))
+			|| (kda::g_inputSystem.GetKeyDown(SDL_SCANCODE_UP) && !kda::g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_UP))
+			|| (kda::g_inputSystem.GetKeyDown(SDL_SCANCODE_W) && !kda::g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_W))))
 		{
 			kda::vec2 up = kda::vec2{ 0, -1 };
 			m_physicsComponent->SetVelocity(velocity + (up * jump));
@@ -67,6 +70,8 @@ namespace kda {
 	void Player::onCollisionEnter(Actor* actor) {
 		if (actor->tag == "Enemy") {
 			hp -= 5;
+			m_spriteAnimComponent->SetSequence("hit");
+			kda::g_audioSystem.PlayOneShot("hit", false);
 		}
 		if (hp <= 0) {
 			destroyed = true;

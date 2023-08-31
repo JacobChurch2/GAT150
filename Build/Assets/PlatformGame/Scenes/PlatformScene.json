@@ -41,7 +41,7 @@
 			"persistent": true,
 			"transform": {
 				"position": [ 800, 300 ],
-				"scale": 1,
+				"scale": 1.5,
 				"rotation": 0
 			},
 			"components": [
@@ -50,7 +50,7 @@
 					"fontName": "Fonts/ggtype.ttf",
 					"fontSize": 24,
 					"text": "",
-					"color": [ 1, 1, 1, 1 ]
+					"color": [ 1, 1, 14, 1 ]
 				}
 			]
 		},
@@ -70,6 +70,25 @@
 					"fontSize": 24,
 					"text": "You Win",
 					"color": [ 0, 1, 0, 1 ]
+				}
+			]
+		},
+		{
+			"type": "Actor",
+			"name": "HPText",
+			"persistent": true,
+			"transform": {
+				"position": [ 1536, 48 ],
+				"scale": 1.5,
+				"rotation": 0
+			},
+			"components": [
+				{
+					"type": "TextRenderComponent",
+					"fontName": "Fonts/ggtype.ttf",
+					"fontSize": 24,
+					"text": "",
+					"color": [ 1, 0, 1, 1 ]
 				}
 			]
 		},
@@ -167,9 +186,11 @@
 			"name": "Player",
 			"tag": "Player",
 			"persistent": true,
+			"prototype": true,
 			"speed": 65,
 			"maxSpeed": 8,
 			"jump": 7,
+			"hp": 20,
 			"transform": {
 				"position": [ 32, 32 ],
 				"scale": 0.5,
@@ -206,6 +227,15 @@
 							"startFrame": 41,
 							"endFrame": 48,
 							"textureName": "Textures/PlayerSprites.png"
+						},
+						{
+							"name": "hit",
+							"fps": 3,
+							"numColumns": 8,
+							"numRows": 9,
+							"startFrame": 49,
+							"endFrame": 41,
+							"textureName": "Textures/PlayerSprites.png"
 						}
 					]
 				},
@@ -227,7 +257,7 @@
 			"tag": "Enemy",
 			"persistent": true,
 			"prototype": true,
-			"speed": 0.25,
+			"speed": 0.15,
 			"turnRate": 0.25,
 			"transform": {
 				"position": [ 440, 300 ],

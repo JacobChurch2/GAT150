@@ -28,9 +28,6 @@ namespace kda {
 			kda::vec2 direction = player->transform.position - transform.position;
 			m_physicsComponent->ApplyForce(direction.Normalized() * speed);
 		}
-
-		transform.position.x = kda::wrap(transform.position.x, (float)kda::g_renderer.GetWidth());
-		transform.position.y = kda::wrap(transform.position.y, (float)kda::g_renderer.GetHeight());
 	}
 
 	void Enemy::onCollisionEnter(Actor* actor) {

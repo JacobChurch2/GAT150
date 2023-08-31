@@ -10,11 +10,13 @@ namespace kda {
 		CLASS_DECLARATION(Player)
 
 
-			bool Initialize() override;
+		bool Initialize() override;
 
 		void Update(float dt) override;
 		void onCollisionEnter(Actor* actor) override;
 		void onCollisionExit(Actor* actor) override;
+
+		int getHP() { return hp; }
 
 	private:
 		float speed = 0;

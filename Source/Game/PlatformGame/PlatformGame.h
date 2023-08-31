@@ -26,7 +26,6 @@ public:
 	virtual void Draw(kda::Renderer& renderer) override;
 
 	void SetState(eState state) { m_state = state; }
-	void AddPoints(const kda::Event& event);
 	void OnPlayerDead(const kda::Event& event);
 	void OnEndLevel(const kda::Event& event);
 
